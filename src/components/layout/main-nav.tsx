@@ -3,12 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Home, Users, Briefcase } from 'lucide-react';
+import { Home } from 'lucide-react'; // Removed Users, Briefcase
 
 const navItems = [
   { href: '/', label: 'Home', icon: Home },
-  { href: '/alumni-search', label: 'Alumni Search', icon: Users },
-  { href: '/job-board', label: 'Job Board', icon: Briefcase },
+  // { href: '/alumni-search', label: 'Alumni Search', icon: Users }, // Removed
+  // { href: '/job-board', label: 'Job Board', icon: Briefcase }, // Removed
 ];
 
 export function MainNav() {

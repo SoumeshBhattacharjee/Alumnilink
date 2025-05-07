@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Search, Briefcase, Users as UsersIcon, UserCircle as UserCircleIcon } from 'lucide-react'; // Renamed imported icons
+import { ArrowRight, UserCircle as UserCircleIcon } from 'lucide-react'; // Removed Search, Briefcase, UsersIcon
 import Image from 'next/image';
 
 export default function Home() {
@@ -15,23 +15,10 @@ export default function Home() {
                   Welcome to Alumnilink
                 </h1>
                 <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                  Connect with fellow alumni, explore career opportunities, and stay engaged with your alma mater.
+                  Connect with fellow alumni and stay engaged with your alma mater. Manage your profile and network within the Gcelt community after you register.
                 </p>
               </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Link href="/alumni-search" passHref>
-                  <Button size="lg">
-                    <Search className="mr-2 h-5 w-5" />
-                    Search Alumni
-                  </Button>
-                </Link>
-                <Link href="/job-board" passHref>
-                  <Button variant="secondary" size="lg">
-                    <Briefcase className="mr-2 h-5 w-5" />
-                    View Job Board
-                  </Button>
-                </Link>
-              </div>
+              {/* Removed hero buttons for Search Alumni and Job Board */}
             </div>
             <Image
               src="https://picsum.photos/seed/alumni-portal/600/400"
@@ -49,27 +36,15 @@ export default function Home() {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Key Features</h2>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Your Alumni Hub</h2>
               <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Discover the tools and resources available to you as a member of the Gcelt alumni network.
+                Manage your profile and stay connected with the Gcelt alumni network.
               </p>
             </div>
           </div>
-          <div className="mx-auto grid max-w-5xl items-start gap-8 sm:grid-cols-2 md:gap-12 lg:grid-cols-3 lg:max-w-none mt-12">
-            <FeatureCard
-              title="Alumni Directory"
-              description="Find and connect with alumni based on graduation year, batch, or company."
-              icon={<UsersIcon className="h-8 w-8 text-primary" />}
-              link="/alumni-search"
-              linkLabel="Explore Directory"
-            />
-            <FeatureCard
-              title="Job Board"
-              description="Access exclusive job postings from fellow alumni and partner companies."
-              icon={<Briefcase className="h-8 w-8 text-primary" />}
-              link="/job-board"
-              linkLabel="Find Opportunities"
-            />
+          <div className="mx-auto grid max-w-md items-start gap-8 mt-12">
+            {/* Removed Alumni Directory FeatureCard */}
+            {/* Removed Job Board FeatureCard */}
             <FeatureCard
               title="Profile Management"
               description="Keep your profile updated to stay connected and visible within the network."
