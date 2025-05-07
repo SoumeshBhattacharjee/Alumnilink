@@ -13,7 +13,7 @@ export default function SiteHeader() {
       <div className="container flex h-16 max-w-screen-2xl items-center">
         <Link href="/" className="mr-6 flex items-center space-x-2">
           <span className="font-bold text-xl sm:inline-block">
-            Gcelt StudentAlumniLink
+            gcelt alumnilink
           </span>
         </Link>
         <MainNav />

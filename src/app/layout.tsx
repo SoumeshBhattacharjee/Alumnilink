@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Gcelt - StudentAlumniLink',
+  title: 'gcelt alumnilink',
   description: 'College Alumni Portal for Gcelt.',
 };
 
@@ -30,7 +30,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        suppressHydrationWarning={true}
         className={cn(
           geistSans.variable,
           geistMono.variable,
@@ -47,3 +46,4 @@ export default function RootLayout({
     </html>
   );
 }
+

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Search, Briefcase } from 'lucide-react';
+import { ArrowRight, Search, Briefcase, Users as UsersIcon, UserCircle as UserCircleIcon } from 'lucide-react'; // Renamed imported icons
 import Image from 'next/image';
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
             <div className="flex flex-col justify-center space-y-4 text-left">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-                  Welcome to Gcelt StudentAlumniLink
+                  Welcome to gcelt alumnilink
                 </h1>
                 <p className="max-w-[600px] text-muted-foreground md:text-xl">
                   Connect with fellow alumni, explore career opportunities, and stay engaged with your alma mater.
@@ -59,7 +59,7 @@ export default function Home() {
             <FeatureCard
               title="Alumni Directory"
               description="Find and connect with alumni based on graduation year, batch, or company."
-              icon={<Users className="h-8 w-8 text-primary" />}
+              icon={<UsersIcon className="h-8 w-8 text-primary" />}
               link="/alumni-search"
               linkLabel="Explore Directory"
             />
@@ -73,7 +73,7 @@ export default function Home() {
             <FeatureCard
               title="Profile Management"
               description="Keep your profile updated to stay connected and visible within the network."
-              icon={<UserCircle className="h-8 w-8 text-primary" />}
+              icon={<UserCircleIcon className="h-8 w-8 text-primary" />}
               link="/profile"
               linkLabel="Update Your Profile"
             />
@@ -108,12 +108,3 @@ function FeatureCard({ icon, title, description, link, linkLabel }: FeatureCardP
     </div>
   );
 }
-
-// Placeholder icons - replace with actual icons from lucide-react or other library
-const Users = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-);
-
-const UserCircle = (props: React.SVGProps<SVGSVGElement>) => (
- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>
-);
