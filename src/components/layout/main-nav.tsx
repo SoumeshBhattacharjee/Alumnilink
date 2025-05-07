@@ -3,12 +3,13 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Newspaper, ClipboardList, Users, MessageSquare } from 'lucide-react'; 
+import { Newspaper, ClipboardList, Users, MessageSquare, Briefcase } from 'lucide-react'; 
 
 const navItems = [
   { href: '/feed', label: 'Feed', icon: Newspaper },
   { href: '/notice-board', label: 'Notice Board', icon: ClipboardList },
   { href: '/connect-search', label: 'Connect & Search', icon: Users },
+  { href: '/job-board', label: 'Job Board', icon: Briefcase },
   { href: '/chat', label: 'Chat', icon: MessageSquare },
 ];
 
@@ -33,3 +34,4 @@ export function MainNav() {
     </nav>
   );
 }
+

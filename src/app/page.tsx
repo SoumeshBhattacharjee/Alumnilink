@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, UserCircle as UserCircleIcon, Users, Newspaper, ClipboardList, MessageSquare } from 'lucide-react';
+import { ArrowRight, UserCircle as UserCircleIcon, Users, Newspaper, ClipboardList, Briefcase } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Home() {
@@ -73,12 +73,18 @@ export default function Home() {
               link="/notice-board"
               linkLabel="View Notices"
             />
-            {/* Removed Chat from landing page features as it's more of a direct interaction tool post-login */}
+             <FeatureCard
+              title="Job Opportunities"
+              description="Explore job openings shared by alumni and post opportunities from your company."
+              icon={<Briefcase className="h-8 w-8 text-primary" />}
+              link="/job-board" 
+              linkLabel="Visit Job Board"
+            />
              <FeatureCard
               title="Your Profile"
               description="Keep your profile updated to stay connected and visible within the network."
               icon={<UserCircleIcon className="h-8 w-8 text-primary" />}
-              link="/profile" // This link might only be fully functional post-login
+              link="/profile" 
               linkLabel="Manage Your Profile"
             />
           </div>
@@ -112,3 +118,4 @@ function FeatureCard({ icon, title, description, link, linkLabel }: FeatureCardP
     </div>
   );
 }
+
