@@ -15,29 +15,45 @@ export default function SiteHeader() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleAuthChange = () => {
-      const newAuthStatus = localStorage.getItem('isAuthenticated') === 'true';
-      if (newAuthStatus !== isAuthenticated) { // Only update state if it's actually different
-        setIsAuthenticated(newAuthStatus);
+    // Function to update authentication status
+    const updateAuthStatus = () => {
+      const authStatus = localStorage.getItem('isAuthenticated') === 'true';
+      if (authStatus !== isAuthenticated) {
+        setIsAuthenticated(authStatus);
       }
     };
 
-    // Check auth status on initial mount and whenever the pathname changes
-    handleAuthChange();
+    // Call on mount and when pathname changes (e.g., after navigation)
+    updateAuthStatus();
 
-    // Listen for storage events to sync auth state across tabs/windows
-    window.addEventListener('storage', handleAuthChange);
+    // Listen for storage events to sync across tabs/windows
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === 'isAuthenticated') {
+        updateAuthStatus();
+      }
+    };
+    window.addEventListener('storage', handleStorageChange);
+
+    // Also listen for custom 'authChange' events if dispatched by login/logout logic elsewhere
+    const handleCustomAuthChange = () => {
+      updateAuthStatus();
+    };
+    window.addEventListener('authChange', handleCustomAuthChange);
+
 
     return () => {
-      window.removeEventListener('storage', handleAuthChange);
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('authChange', handleCustomAuthChange);
     };
-  }, [pathname, isAuthenticated]); // Add isAuthenticated to dependencies to re-evaluate if it changes from an external source (like storage event)
+  }, [pathname, isAuthenticated]); // Re-run effect if pathname or isAuthenticated changes
 
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
     setIsAuthenticated(false);
+    // Dispatch a custom event so other components (like this header) can react immediately
+    window.dispatchEvent(new CustomEvent('authChange')); 
     router.push('/login');
-    router.refresh(); 
+    // router.refresh(); // Not always necessary if state updates trigger re-render
   };
 
   return (
@@ -48,7 +64,7 @@ export default function SiteHeader() {
             Alumnilink
           </span>
         </Link>
-        <MainNav />
+        {isAuthenticated && <MainNav />}
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-2">
             {isAuthenticated ? (
@@ -88,3 +104,4 @@ export default function SiteHeader() {
     </header>
   );
 }
+

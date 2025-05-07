@@ -31,9 +31,11 @@ export default function LoginPage() {
     
     // Simulate successful login
     localStorage.setItem('isAuthenticated', 'true');
+    // Dispatch a custom event so other components (like header) can react immediately
+    window.dispatchEvent(new CustomEvent('authChange'));
     setIsLoading(false);
     router.push('/profile'); 
-    router.refresh(); // To ensure header updates
+    // router.refresh(); // Not always necessary if state updates trigger re-render
   };
 
   return (
@@ -100,3 +102,4 @@ export default function LoginPage() {
     </div>
   );
 }
+

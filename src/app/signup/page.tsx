@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { UserPlus, Mail, Key, User as UserIcon } from 'lucide-react'; // Renamed User to UserIcon
+import { UserPlus, Mail, Key, User as UserIcon } from 'lucide-react'; 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -38,9 +38,11 @@ export default function SignupPage() {
     
     // Simulate successful signup
     localStorage.setItem('isAuthenticated', 'true');
+    // Dispatch a custom event so other components (like header) can react immediately
+    window.dispatchEvent(new CustomEvent('authChange'));
     setIsLoading(false);
     router.push('/profile');
-    router.refresh(); // To ensure header updates 
+    // router.refresh(); // Not always necessary if state updates trigger re-render
   };
 
   return (
@@ -132,3 +134,4 @@ export default function SignupPage() {
     </div>
   );
 }
+
