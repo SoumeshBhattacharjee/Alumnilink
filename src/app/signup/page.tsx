@@ -9,6 +9,7 @@ import { UserPlus, Mail, Key, User as UserIcon, CalendarClock,Hash } from 'lucid
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useToast } from '@/hooks/use-toast';
 
 export default function SignupPage() {
   const [fullName, setFullName] = useState('');
@@ -19,6 +20,7 @@ export default function SignupPage() {
   const [rollNumber, setRollNumber] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const { toast } = useToast();
 
   // Redirect if already logged in
   useEffect(() => {
@@ -32,20 +34,36 @@ export default function SignupPage() {
     setIsLoading(true);
     
     if (password !== confirmPassword) {
-      alert("Passwords don't match!"); // Replace with proper toast notification
+      toast({
+        title: "Error",
+        description: "Passwords don't match!",
+        variant: "destructive",
+      });
       setIsLoading(false);
       return;
     }
-    console.log('Signup attempt:', { fullName, email, password, batchYear, rollNumber });
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+    console.log('Signup attempt (Send for Verification):', { fullName, email, password, batchYear, rollNumber });
     
-    // Simulate successful signup
-    localStorage.setItem('isAuthenticated', 'true');
-    // Dispatch a custom event so other components (like header) can react immediately
-    window.dispatchEvent(new CustomEvent('authChange'));
+    // Simulate API call for verification
+    await new Promise(resolve => setTimeout(resolve, 1500)); 
+    
+    // Simulate successful verification request
     setIsLoading(false);
-    router.push('/profile');
-    // router.refresh(); // Not always necessary if state updates trigger re-render
+    toast({
+      title: "Registration Submitted",
+      description: "Your registration has been sent for verification. You will be notified once it's approved.",
+    });
+    // For now, we will not automatically log in or redirect. User waits for approval.
+    // Optionally, redirect to a "pending verification" page or back to login.
+    // router.push('/login'); 
+    
+    // Clear form fields after submission might be a good UX
+    setFullName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setBatchYear('');
+    setRollNumber('');
   };
 
   return (
@@ -56,7 +74,7 @@ export default function SignupPage() {
             <UserPlus className="h-8 w-8 text-primary" />
           </div>
           <CardTitle className="text-2xl">Create an Account</CardTitle>
-          <CardDescription>Join the GCELT Alumni Network today!</CardDescription>
+          <CardDescription>Join the GCELT Alumni Network. Your registration will be sent for verification.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -151,7 +169,7 @@ export default function SignupPage() {
               />
             </div>
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? 'Creating Account...' : 'Sign Up'}
+              {isLoading ? 'Sending for Verification...' : 'Send for Verification'}
             </Button>
           </form>
         </CardContent>

@@ -13,8 +13,8 @@
     --popover: 30 60% 92%; /* Even Lighter Peach */
     --popover-foreground: 25 50% 25%; /* Dark Brown */
 
-    --primary: 25 85% 60%; /* Terracotta Orange */
-    --primary-foreground: 30 80% 98%; /* Very Light Peach (for text on primary) */
+    --primary: 210 70% 55%; /* Professional Blue */
+    --primary-foreground: 20 0% 98%; /* Very Light (almost white) for text on primary blue */
 
     --secondary: 120 30% 60%; /* Muted Green */
     --secondary-foreground: 120 20% 98%; /* Very Light Green (for text on secondary) */
@@ -30,11 +30,11 @@
 
     --border: 30 30% 80%; /* Light Peach-Gray Border */
     --input: 30 40% 92%; /* Very Light Peach-Gray Input Background */
-    --ring: 25 75% 70%; /* Brighter Terracotta Orange for Focus Ring */
+    --ring: 210 80% 65%; /* Brighter Blue for Focus Ring */
 
     --radius: 0.5rem; /* Rounded corners */
 
-    --chart-1: 25 70% 55%;  /* Terracotta */
+    --chart-1: 210 65% 50%;  /* Blue shade for charts */
     --chart-2: 120 35% 50%; /* Darker Muted Green */
     --chart-3: 40 60% 50%;  /* Olive Green */
     --chart-4: 20 50% 60%;  /* Light Brown */
@@ -42,12 +42,12 @@
 
     --sidebar-background: 30 40% 90%; /* Slightly Darker/Saturated Light Peach-Gray */
     --sidebar-foreground: 25 40% 30%; /* Darker Brown for Sidebar */
-    --sidebar-primary: 25 85% 60%; /* Same as primary */
-    --sidebar-primary-foreground: 30 80% 98%; /* Same as primary-foreground */
+    --sidebar-primary: hsl(var(--primary)); 
+    --sidebar-primary-foreground: hsl(var(--primary-foreground));
     --sidebar-accent: 45 70% 65%; /* Same as accent */
     --sidebar-accent-foreground: 25 50% 25%; /* Same as accent-foreground */
     --sidebar-border: 30 30% 75%; /* Slightly Darker Peach-Gray Border for Sidebar */
-    --sidebar-ring: 25 75% 70%; /* Same as ring */
+    --sidebar-ring: hsl(var(--ring)); 
   }
 
   .dark {
@@ -60,8 +60,8 @@
     --popover: 25 15% 22%; /* Darker Popover Brown-Gray */
     --popover-foreground: 30 30% 85%; /* Light Peach-Gray */
 
-    --primary: 25 75% 70%; /* Brighter Terracotta for Dark Mode */
-    --primary-foreground: 25 15% 10%; /* Very Dark Brown (for text on primary) */
+    --primary: 210 75% 65%; /* Brighter Blue for Dark Mode */
+    --primary-foreground: 210 15% 10%; /* Very Dark Blue (for text on primary) */
 
     --secondary: 120 40% 70%; /* Brighter Muted Green for Dark Mode */
     --secondary-foreground: 120 15% 10%; /* Very Dark Green (for text on secondary) */
@@ -77,9 +77,9 @@
 
     --border: 25 10% 35%; /* Dark Brown-Gray Border */
     --input: 25 10% 25%; /* Dark Input Background */
-    --ring: 25 70% 75%; /* Brighter Terracotta for Focus Ring */
+    --ring: 210 80% 70%; /* Brighter Blue for Focus Ring */
     
-    --chart-1: 25 70% 65%;
+    --chart-1: 210 70% 60%; /* Blue shade for charts in dark mode */
     --chart-2: 120 40% 60%;
     --chart-3: 40 50% 55%;
     --chart-4: 20 45% 65%;
@@ -87,12 +87,12 @@
     
     --sidebar-background: 25 15% 22%; /* Slightly Lighter/Saturated Dark Brown-Gray */
     --sidebar-foreground: 30 25% 80%; /* Lighter Peach-Gray for Sidebar */
-    --sidebar-primary: 25 75% 70%; /* Same as primary */
-    --sidebar-primary-foreground: 25 15% 10%; /* Same as primary-foreground */
+    --sidebar-primary: hsl(var(--primary));
+    --sidebar-primary-foreground: hsl(var(--primary-foreground));
     --sidebar-accent: 45 80% 75%; /* Same as accent */
     --sidebar-accent-foreground: 25 15% 10%; /* Same as accent-foreground */
     --sidebar-border: 25 10% 40%; /* Darker Brown-Gray Border for Sidebar */
-    --sidebar-ring: 25 70% 75%; /* Same as ring */
+    --sidebar-ring: hsl(var(--ring));
   }
 }
 
