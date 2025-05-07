@@ -4,95 +4,95 @@
 
 @layer base {
   :root {
-    --background: 120 100% 90%; /* Very Light Green - Eye-strain bright */
-    --foreground: 300 100% 25%; /* Dark Magenta - Clashes with light green */
+    --background: 210 40% 98%; /* Light Sky Blue-Gray */
+    --foreground: 210 40% 10%; /* Dark Slate Blue */
 
-    --card: 50 100% 80%; /* Light Yellow-Orange - Clashes */
-    --card-foreground: 210 100% 30%; /* Dark Blue - Clashes */
+    --card: 210 40% 96%; /* Lighter Sky Blue-Gray */
+    --card-foreground: 210 40% 10%; /* Dark Slate Blue */
 
-    --popover: 30 100% 90%; /* Light Orange */
-    --popover-foreground: 150 100% 20%; /* Dark Teal */
+    --popover: 210 40% 94%; /* Even Lighter Sky Blue-Gray */
+    --popover-foreground: 210 40% 10%; /* Dark Slate Blue */
 
-    --primary: 0 100% 50%; /* Pure Red - Aggressive */
-    --primary-foreground: 60 100% 50%; /* Pure Yellow - Bad on Red */
+    --primary: 210 80% 55%; /* Medium Blue */
+    --primary-foreground: 210 40% 98%; /* Very Light Blue-Gray (for text on primary) */
 
-    --secondary: 180 100% 85%; /* Light Cyan - Clashes */
-    --secondary-foreground: 30 100% 20%; /* Dark Orange - Clashes */
+    --secondary: 180 60% 45%; /* Teal */
+    --secondary-foreground: 180 40% 98%; /* Very Light Cyan (for text on secondary) */
 
-    --muted: 270 50% 80%; /* Light Purple - Clashes */
-    --muted-foreground: 90 70% 30%; /* Murky Green - Bad on Light Purple */
+    --muted: 210 20% 90%; /* Soft Light Blue-Gray */
+    --muted-foreground: 210 20% 45%; /* Medium Desaturated Blue-Gray */
 
-    --accent: 240 100% 50%; /* Pure Blue - Aggressive */
-    --accent-foreground: 120 100% 50%; /* Pure Green - Bad on Blue */
+    --accent: 200 80% 60%; /* Bright Sky Blue */
+    --accent-foreground: 210 40% 10%; /* Dark Slate Blue (for text on accent) */
 
-    --destructive: 45 100% 50%; /* Bright Orange - for destructive actions */
-    --destructive-foreground: 0 0% 0%; /* Black */
+    --destructive: 0 70% 50%; /* Soft Red */
+    --destructive-foreground: 0 0% 98%; /* Very Light Gray (for text on destructive) */
 
-    --border: 330 100% 50%; /* Bright Pink - Distracting borders */
-    --input: 150 100% 90%; /* Very Light Teal - Stands out weirdly */
-    --ring: 0 0% 0%; /* Black - Harsh focus rings */
+    --border: 210 20% 85%; /* Light Gray-Blue Border */
+    --input: 210 20% 92%; /* Very Light Gray-Blue Input Background */
+    --ring: 210 70% 65%; /* Brighter Medium Blue for Focus Ring */
 
-    --radius: 0rem; /* No border radius for a blocky look */
+    --radius: 0.5rem; /* Rounded corners */
 
-    --chart-1: 0 100% 50%;
-    --chart-2: 60 100% 50%;
-    --chart-3: 120 100% 50%;
-    --chart-4: 180 100% 50%;
-    --chart-5: 240 100% 50%;
+    --chart-1: 210 70% 50%; /* Blue */
+    --chart-2: 180 60% 45%; /* Teal */
+    --chart-3: 150 60% 45%; /* Green-Teal */
+    --chart-4: 45 80% 55%;  /* Orange-Yellow */
+    --chart-5: 30 80% 60%;  /* Orange */
 
-    --sidebar-background: 100 30% 80%; /* Muddy Light Green-Yellow */
-    --sidebar-foreground: 300 80% 15%; /* Very Dark Magenta */
-    --sidebar-primary: 0 100% 40%; /* Darker Red */
-    --sidebar-primary-foreground: 60 100% 60%; /* Lighter Yellow */
-    --sidebar-accent: 240 100% 40%; /* Darker Blue */
-    --sidebar-accent-foreground: 120 100% 60%; /* Lighter Green */
-    --sidebar-border: 330 100% 60%; /* Lighter Pink */
-    --sidebar-ring: 10 100% 50%; /* Bright Orange for ring */
+    --sidebar-background: 210 30% 92%; /* Slightly Darker/Saturated Light Blue-Gray */
+    --sidebar-foreground: 210 30% 20%; /* Darker Slate Blue for Sidebar */
+    --sidebar-primary: 210 80% 55%; /* Same as primary */
+    --sidebar-primary-foreground: 210 40% 98%; /* Same as primary-foreground */
+    --sidebar-accent: 200 80% 60%; /* Same as accent */
+    --sidebar-accent-foreground: 210 40% 10%; /* Same as accent-foreground */
+    --sidebar-border: 210 20% 80%; /* Slightly Darker Gray-Blue Border for Sidebar */
+    --sidebar-ring: 210 70% 65%; /* Same as ring */
   }
 
   .dark {
-    --background: 0 0% 5%; /* Almost Black */
-    --foreground: 0 100% 70%; /* Bright Red text on dark - Eye strain */
+    --background: 210 20% 12%; /* Dark Desaturated Blue */
+    --foreground: 210 40% 95%; /* Light Gray-Blue */
 
-    --card: 120 100% 15%; /* Very Dark Green - Gloomy */
-    --card-foreground: 60 100% 70%; /* Bright Yellow text on dark green */
+    --card: 210 20% 15%; /* Slightly Lighter Dark Blue */
+    --card-foreground: 210 40% 95%; /* Light Gray-Blue */
 
-    --popover: 200 50% 10%; /* Dark Desaturated Blue */
-    --popover-foreground: 20 100% 80%; /* Light Orange */
+    --popover: 210 20% 18%; /* Darker Popover Blue */
+    --popover-foreground: 210 40% 95%; /* Light Gray-Blue */
 
-    --primary: 300 100% 70%; /* Bright Magenta */
-    --primary-foreground: 180 100% 20%; /* Dark Cyan - Low contrast */
+    --primary: 210 90% 65%; /* Brighter Blue for Dark Mode */
+    --primary-foreground: 210 20% 10%; /* Very Dark Blue (for text on primary) */
 
-    --secondary: 210 80% 25%; /* Darkish Blue */
-    --secondary-foreground: 30 100% 75%; /* Bright Orange */
+    --secondary: 180 70% 55%; /* Brighter Teal for Dark Mode */
+    --secondary-foreground: 180 20% 10%; /* Very Dark Cyan (for text on secondary) */
 
-    --muted: 240 40% 20%; /* Dark Muted Blue */
-    --muted-foreground: 0 60% 60%; /* Muted Red */
+    --muted: 210 15% 25%; /* Dark Muted Blue */
+    --muted-foreground: 210 20% 70%; /* Lighter Muted Gray-Blue */
 
-    --accent: 90 100% 60%; /* Bright Lime Green */
-    --accent-foreground: 270 100% 30%; /* Dark Purple */
+    --accent: 200 90% 70%; /* Brighter Sky Blue for Dark Mode */
+    --accent-foreground: 210 20% 10%; /* Very Dark Blue (for text on accent) */
 
-    --destructive: 45 100% 60%; /* Lighter Bright Orange */
-    --destructive-foreground: 0 0% 100%; /* White */
+    --destructive: 0 70% 60%; /* Brighter Soft Red for Dark Mode */
+    --destructive-foreground: 0 0% 98%; /* Very Light Gray */
 
-    --border: 50 100% 50%; /* Bright Yellow-Orange borders - Very distracting */
-    --input: 30 100% 10%; /* Very Dark Orange input - Hard to see */
-    --ring: 0 100% 100%; /* White - Harsh focus rings */
-
-    --chart-1: 300 100% 70%;
-    --chart-2: 30 100% 75%;
-    --chart-3: 90 100% 60%;
-    --chart-4: 210 80% 25%;
-    --chart-5: 120 100% 15%;
+    --border: 210 15% 30%; /* Dark Gray-Blue Border */
+    --input: 210 15% 22%; /* Dark Input Background */
+    --ring: 210 80% 70%; /* Brighter Blue for Focus Ring */
     
-    --sidebar-background: 30 40% 10%; /* Dark Brownish */
-    --sidebar-foreground: 150 70% 70%; /* Light Teal/Green */
-    --sidebar-primary: 300 100% 60%; /* Lighter Magenta */
-    --sidebar-primary-foreground: 180 100% 30%; /* Medium Dark Cyan */
-    --sidebar-accent: 90 100% 50%; /* Medium Lime Green */
-    --sidebar-accent-foreground: 270 100% 40%; /* Medium Dark Purple */
-    --sidebar-border: 50 100% 40%; /* Medium Yellow-Orange */
-    --sidebar-ring: 0 100% 80%; /* Light Red ring */
+    --chart-1: 210 80% 65%;
+    --chart-2: 180 70% 60%;
+    --chart-3: 150 70% 60%;
+    --chart-4: 45 90% 65%;
+    --chart-5: 30 90% 70%;
+    
+    --sidebar-background: 210 20% 18%; /* Slightly Lighter/Saturated Dark Blue */
+    --sidebar-foreground: 210 30% 85%; /* Lighter Gray-Blue for Sidebar */
+    --sidebar-primary: 210 90% 65%; /* Same as primary */
+    --sidebar-primary-foreground: 210 20% 10%; /* Same as primary-foreground */
+    --sidebar-accent: 200 90% 70%; /* Same as accent */
+    --sidebar-accent-foreground: 210 20% 10%; /* Same as accent-foreground */
+    --sidebar-border: 210 15% 35%; /* Darker Gray-Blue Border for Sidebar */
+    --sidebar-ring: 210 80% 70%; /* Same as ring */
   }
 }
 
