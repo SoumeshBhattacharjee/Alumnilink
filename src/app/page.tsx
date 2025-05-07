@@ -12,11 +12,21 @@ export default function Home() {
             <div className="flex flex-col justify-center space-y-4 text-left">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-                  Welcome to Alumnilink
+                  Welcome to GCELT Alumnilink
                 </h1>
                 <p className="max-w-[600px] text-muted-foreground md:text-xl">
                   Your exclusive social network for GCELT alumni. Connect, network, search for fellow graduates, and stay updated with the community.
                 </p>
+              </div>
+              <div className="flex flex-col gap-2 min-[400px]:flex-row pt-2">
+                <Link href="/signup">
+                  <Button size="lg">Join Now</Button>
+                </Link>
+                <Link href="/login">
+                  <Button size="lg" variant="outline">
+                    Member Login
+                  </Button>
+                </Link>
               </div>
             </div>
             <Image
