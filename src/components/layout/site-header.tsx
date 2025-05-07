@@ -5,23 +5,37 @@ import { MainNav } from '@/components/layout/main-nav';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { LogIn, UserCircle, LogOut, UserPlus } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 export default function SiteHeader() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
-    // Check localStorage for authentication status
-    const authStatus = localStorage.getItem('isAuthenticated');
-    setIsAuthenticated(authStatus === 'true');
-  }, []);
+    const handleAuthChange = () => {
+      const authStatus = localStorage.getItem('isAuthenticated');
+      setIsAuthenticated(authStatus === 'true');
+    };
+
+    // Initial check
+    handleAuthChange();
+
+    // Listen for storage changes (e.g., from other tabs or direct manipulation)
+    window.addEventListener('storage', handleAuthChange);
+
+    // The effect also re-runs if pathname changes, ensuring SPA navigations update the header
+    return () => {
+      window.removeEventListener('storage', handleAuthChange);
+    };
+  }, [pathname]); // Re-run when path changes or on initial mount.
 
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
     setIsAuthenticated(false);
     router.push('/login');
+    router.refresh(); // Ensure layout and server components also refresh if needed
   };
 
   return (
