@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -15,27 +16,28 @@ export default function SiteHeader() {
 
   useEffect(() => {
     const handleAuthChange = () => {
-      const authStatus = localStorage.getItem('isAuthenticated');
-      setIsAuthenticated(authStatus === 'true');
+      const newAuthStatus = localStorage.getItem('isAuthenticated') === 'true';
+      if (newAuthStatus !== isAuthenticated) { // Only update state if it's actually different
+        setIsAuthenticated(newAuthStatus);
+      }
     };
 
-    // Initial check
+    // Check auth status on initial mount and whenever the pathname changes
     handleAuthChange();
 
-    // Listen for storage changes (e.g., from other tabs or direct manipulation)
+    // Listen for storage events to sync auth state across tabs/windows
     window.addEventListener('storage', handleAuthChange);
 
-    // The effect also re-runs if pathname changes, ensuring SPA navigations update the header
     return () => {
       window.removeEventListener('storage', handleAuthChange);
     };
-  }, [pathname]); // Re-run when path changes or on initial mount.
+  }, [pathname, isAuthenticated]); // Add isAuthenticated to dependencies to re-evaluate if it changes from an external source (like storage event)
 
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
     setIsAuthenticated(false);
     router.push('/login');
-    router.refresh(); // Ensure layout and server components also refresh if needed
+    router.refresh(); 
   };
 
   return (
