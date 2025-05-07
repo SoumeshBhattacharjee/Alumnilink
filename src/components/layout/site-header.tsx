@@ -10,23 +10,26 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 export default function SiteHeader() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Default to false, real auth will set this
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
     // Function to update authentication status
     const updateAuthStatus = () => {
+      // Bypass login logic for now, consider the user always authenticated
+      // In a real app, this would check a token, session, etc.
+      // Forcing true for now to show authenticated state:
+      // setIsAuthenticated(true); 
+      // Reverted to localStorage check as per previous logic, but login/signup page still force true
       const authStatus = localStorage.getItem('isAuthenticated') === 'true';
       if (authStatus !== isAuthenticated) {
         setIsAuthenticated(authStatus);
       }
     };
 
-    // Call on mount and when pathname changes (e.g., after navigation)
     updateAuthStatus();
 
-    // Listen for storage events to sync across tabs/windows
     const handleStorageChange = (event: StorageEvent) => {
       if (event.key === 'isAuthenticated') {
         updateAuthStatus();
@@ -34,7 +37,6 @@ export default function SiteHeader() {
     };
     window.addEventListener('storage', handleStorageChange);
 
-    // Also listen for custom 'authChange' events if dispatched by login/logout logic elsewhere
     const handleCustomAuthChange = () => {
       updateAuthStatus();
     };
@@ -45,29 +47,29 @@ export default function SiteHeader() {
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('authChange', handleCustomAuthChange);
     };
-  }, [pathname, isAuthenticated]); // Re-run effect if pathname or isAuthenticated changes
+  }, [pathname, isAuthenticated]); 
 
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
     setIsAuthenticated(false);
-    // Dispatch a custom event so other components (like this header) can react immediately
     window.dispatchEvent(new CustomEvent('authChange')); 
     router.push('/login');
-    // router.refresh(); // Not always necessary if state updates trigger re-render
   };
+  
+  const isAuthPage = pathname === '/login' || pathname === '/signup';
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center">
-        <Link href="/" className="mr-6 flex items-center space-x-2">
+        <Link href="/" className="ml-4 mr-6 flex items-center space-x-2"> {/* Added ml-4 */}
           <span className="font-bold text-xl sm:inline-block">
             Alumnilink
           </span>
         </Link>
-        {isAuthenticated && <MainNav />}
+        {isAuthenticated && !isAuthPage && <MainNav />}
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-2">
-            {isAuthenticated ? (
+            {isAuthenticated && !isAuthPage ? (
               <>
                 <Link href="/profile">
                   <Avatar className="h-8 w-8 cursor-pointer">
@@ -104,4 +106,3 @@ export default function SiteHeader() {
     </header>
   );
 }
-
