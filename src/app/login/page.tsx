@@ -6,8 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { LogIn, Mail, Key } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation'; // For redirection
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -15,26 +15,36 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+  // Redirect if already logged in
+  useEffect(() => {
+    if (localStorage.getItem('isAuthenticated') === 'true') {
+      router.push('/profile');
+    }
+  }, [router]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     // Placeholder for login logic
     console.log('Login attempt:', { email, password });
-    await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+    
+    // Simulate successful login
+    localStorage.setItem('isAuthenticated', 'true');
     setIsLoading(false);
-    // For now, bypass actual login and redirect to profile
     router.push('/profile'); 
+    router.refresh(); // To ensure header updates
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-10rem)] py-12">
+    <div className="flex items-center justify-center min-h-[calc(100vh-12rem)] py-12">
       <Card className="w-full max-w-md shadow-xl">
         <CardHeader className="space-y-1 text-center">
           <div className="inline-block p-3 bg-primary/10 rounded-full mx-auto mb-4">
             <LogIn className="h-8 w-8 text-primary" />
           </div>
           <CardTitle className="text-2xl">Welcome Back!</CardTitle>
-          <CardDescription>Enter your credentials to access your account.</CardDescription>
+          <CardDescription>Enter your credentials to access your GCELT Alumnilink account.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -50,6 +60,7 @@ export default function LoginPage() {
                 required 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
               />
             </div>
             <div className="space-y-2">
@@ -65,10 +76,11 @@ export default function LoginPage() {
               <Input 
                 id="password" 
                 type="password" 
-                placeholder="password"
+                placeholder="Your password"
                 required 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
               />
             </div>
             <Button type="submit" className="w-full" disabled={isLoading}>

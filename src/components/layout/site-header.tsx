@@ -1,12 +1,28 @@
+'use client';
+
 import Link from 'next/link';
 import { MainNav } from '@/components/layout/main-nav';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { LogIn, UserCircle } from 'lucide-react';
+import { LogIn, UserCircle, LogOut, UserPlus } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 export default function SiteHeader() {
-  // Placeholder for authentication status
-  const isAuthenticated = false;
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    // Check localStorage for authentication status
+    const authStatus = localStorage.getItem('isAuthenticated');
+    setIsAuthenticated(authStatus === 'true');
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated');
+    setIsAuthenticated(false);
+    router.push('/login');
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -20,27 +36,36 @@ export default function SiteHeader() {
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-2">
             {isAuthenticated ? (
-              <Link href="/profile">
-                <Avatar>
-                  <AvatarImage src="https://picsum.photos/id/237/200/200" alt="User Avatar" data-ai-hint="user avatar" />
-                  <AvatarFallback>
-                    <UserCircle className="h-5 w-5" />
-                  </AvatarFallback>
-                </Avatar>
-              </Link>
-            ) : (
-              <Link href="/login" passHref>
-                <Button variant="ghost">
-                  <LogIn className="mr-2 h-4 w-4" />
-                  Login
+              <>
+                <Link href="/profile">
+                  <Avatar className="h-8 w-8 cursor-pointer">
+                    <AvatarImage src="https://picsum.photos/id/237/200/200" alt="User Avatar" data-ai-hint="user avatar" />
+                    <AvatarFallback>
+                      <UserCircle className="h-5 w-5" />
+                    </AvatarFallback>
+                  </Avatar>
+                </Link>
+                <Button variant="ghost" onClick={handleLogout}>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Logout
                 </Button>
-              </Link>
+              </>
+            ) : (
+              <>
+                <Link href="/login" passHref>
+                  <Button variant="ghost">
+                    <LogIn className="mr-2 h-4 w-4" />
+                    Login
+                  </Button>
+                </Link>
+                <Link href="/signup" passHref>
+                  <Button>
+                    <UserPlus className="mr-2 h-4 w-4" />
+                    Sign Up
+                  </Button>
+                </Link>
+              </>
             )}
-             {!isAuthenticated && (
-               <Link href="/signup" passHref>
-                <Button>Sign Up</Button>
-              </Link>
-             )}
           </nav>
         </div>
       </div>

@@ -4,10 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { UserPlus, Mail, Key, User } from 'lucide-react';
+import { UserPlus, Mail, Key, User as UserIcon } from 'lucide-react'; // Renamed User to UserIcon
 import Link from 'next/link';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation'; // For redirection
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function SignupPage() {
   const [fullName, setFullName] = useState('');
@@ -17,24 +17,34 @@ export default function SignupPage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+  // Redirect if already logged in
+  useEffect(() => {
+    if (localStorage.getItem('isAuthenticated') === 'true') {
+      router.push('/profile');
+    }
+  }, [router]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    // Placeholder for signup logic
+    
     if (password !== confirmPassword) {
       alert("Passwords don't match!"); // Replace with proper toast notification
       setIsLoading(false);
       return;
     }
     console.log('Signup attempt:', { fullName, email, password });
-    await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+    
+    // Simulate successful signup
+    localStorage.setItem('isAuthenticated', 'true');
     setIsLoading(false);
-    // For now, bypass actual signup and redirect to profile
-    router.push('/profile'); 
+    router.push('/profile');
+    router.refresh(); // To ensure header updates 
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-10rem)] py-12">
+    <div className="flex items-center justify-center min-h-[calc(100vh-12rem)] py-12">
       <Card className="w-full max-w-md shadow-xl">
         <CardHeader className="space-y-1 text-center">
           <div className="inline-block p-3 bg-primary/10 rounded-full mx-auto mb-4">
@@ -47,7 +57,7 @@ export default function SignupPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="fullName" className="flex items-center">
-                <User className="mr-2 h-4 w-4 text-muted-foreground" />
+                <UserIcon className="mr-2 h-4 w-4 text-muted-foreground" />
                 Full Name
               </Label>
               <Input 
@@ -57,6 +67,7 @@ export default function SignupPage() {
                 required 
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
+                autoComplete="name"
               />
             </div>
             <div className="space-y-2">
@@ -71,6 +82,7 @@ export default function SignupPage() {
                 required 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
               />
             </div>
             <div className="space-y-2">
@@ -81,9 +93,11 @@ export default function SignupPage() {
               <Input 
                 id="password" 
                 type="password" 
+                placeholder="Create a password"
                 required 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="new-password"
               />
             </div>
              <div className="space-y-2">
@@ -94,9 +108,11 @@ export default function SignupPage() {
               <Input 
                 id="confirmPassword" 
                 type="password" 
+                placeholder="Confirm your password"
                 required 
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                autoComplete="new-password"
               />
             </div>
             <Button type="submit" className="w-full" disabled={isLoading}>

@@ -1,4 +1,4 @@
-'use client'; // Required for useState, useEffect, or any client-side interactions
+'use client'; 
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -7,11 +7,17 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { User, Mail, Briefcase, CalendarDays, Edit3, BookOpen, Users, Linkedin } from 'lucide-react';
-import { Textarea } from '@/components/ui/textarea'; // Assuming Textarea component exists
+import { Textarea } from '@/components/ui/textarea';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Skeleton } from '@/components/ui/skeleton';
 
-// This is a placeholder page. In a real app, user data would come from an auth provider/backend.
-// This represents the LOGGED-IN USER'S profile.
+
 export default function ProfilePage() {
+  const router = useRouter();
+  const [isLoadingUser, setIsLoadingUser] = useState(true);
+  
+  // This is a placeholder user. In a real app, user data would come from an auth provider/backend.
   const user = {
     name: 'Alumni User',
     email: 'alumni.user@example.com',
@@ -23,11 +29,22 @@ export default function ProfilePage() {
     avatarUrl: 'https://picsum.photos/id/433/200/200',
     bio: 'Passionate software engineer with a focus on web development and cloud technologies. Always eager to learn and connect with fellow GCELT alumni.',
     skills: ['React', 'Node.js', 'TypeScript', 'AWS', 'Next.js'],
-    linkedin: 'https://linkedin.com/in/alumniuser', // Placeholder
+    linkedin: 'https://linkedin.com/in/alumniuser',
   };
 
-  // In a real app, you might fetch this data in useEffect or via server components
-  // For now, it's static
+  useEffect(() => {
+    const authStatus = localStorage.getItem('isAuthenticated');
+    if (authStatus !== 'true') {
+      router.push('/login');
+    } else {
+      setIsLoadingUser(false);
+    }
+  }, [router]);
+
+  if (isLoadingUser) {
+    return <ProfilePageSkeleton />;
+  }
+
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
@@ -125,6 +142,73 @@ function InfoField({ icon, label, value }: InfoFieldProps) {
         <p className="text-sm font-medium text-muted-foreground">{label}</p>
         <p className="text-base font-semibold">{value}</p>
       </div>
+    </div>
+  );
+}
+
+function ProfilePageSkeleton() {
+  return (
+    <div className="space-y-8 max-w-4xl mx-auto">
+      <div className="flex items-center justify-between">
+        <Skeleton className="h-9 w-40" />
+        <Skeleton className="h-10 w-32" />
+      </div>
+      <Card className="shadow-lg">
+        <CardHeader className="flex flex-col items-center text-center sm:flex-row sm:text-left sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 p-6">
+          <Skeleton className="h-28 w-28 rounded-full" />
+          <div className="flex-grow space-y-2">
+            <Skeleton className="h-8 w-48" />
+            <Skeleton className="h-6 w-64" />
+            <Skeleton className="h-4 w-32" />
+            <Skeleton className="h-4 w-40 mt-2" />
+          </div>
+        </CardHeader>
+        <Separator />
+        <CardContent className="p-6 space-y-6">
+          <div>
+            <Skeleton className="h-6 w-32 mb-3" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-full mt-2" />
+            <Skeleton className="h-4 w-3/4 mt-2" />
+          </div>
+          <Separator />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="flex items-start space-x-3">
+                <Skeleton className="h-6 w-6 rounded-full mt-1" />
+                <div className="w-full space-y-1.5">
+                  <Skeleton className="h-4 w-24" />
+                  <Skeleton className="h-5 w-40" />
+                </div>
+              </div>
+            ))}
+          </div>
+          <>
+            <Separator />
+            <div>
+              <Skeleton className="h-6 w-32 mb-3" />
+              <div className="flex flex-wrap gap-2">
+                {[...Array(5)].map((_, i) => (
+                  <Skeleton key={i} className="h-7 w-20 rounded-full" />
+                ))}
+              </div>
+            </div>
+          </>
+          <Separator />
+          <div>
+            <Skeleton className="h-6 w-48 mb-3" />
+            <div className="space-y-4">
+              <div>
+                <Skeleton className="h-4 w-32 mb-1" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full mt-2" />
+                <Skeleton className="h-10 w-full mt-2" />
+                <Skeleton className="h-10 w-36 mt-3" />
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
