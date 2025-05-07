@@ -19,13 +19,13 @@ export default function SiteFooter() {
 
   const disclaimerText = (
     <>
-      <p>
+      <div>
         <strong>Disclaimer:</strong> This is an unofficial alumni platform for Government College of Engineering &amp; Leather Technology (GCELT) and is maintained by students/alumni independently.
-      </p>
-      <p>
+      </div>
+      <div>
         This platform does not impersonate GCELT or any official body. All content and interactions are user-generated and the responsibility of the respective users.
         The platform administrators are not liable for any misinformation or misuse. Use of this platform is at your own risk.
-      </p>
+      </div>
     </>
   );
 
