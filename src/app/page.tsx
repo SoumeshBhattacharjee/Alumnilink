@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, UserCircle as UserCircleIcon } from 'lucide-react'; // Removed Search, Briefcase, UsersIcon
+import { ArrowRight, UserCircle as UserCircleIcon } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Home() {
@@ -15,10 +15,9 @@ export default function Home() {
                   Welcome to Alumnilink
                 </h1>
                 <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                  Connect with fellow alumni and stay engaged with your alma mater. Manage your profile and network within the Gcelt community after you register.
+                  Connect with fellow alumni and stay engaged with your alma mater. Manage your profile and network within the GCELT community after you register.
                 </p>
               </div>
-              {/* Removed hero buttons for Search Alumni and Job Board */}
             </div>
             <Image
               src="https://picsum.photos/seed/alumni-portal/600/400"
@@ -38,13 +37,11 @@ export default function Home() {
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Your Alumni Hub</h2>
               <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Manage your profile and stay connected with the Gcelt alumni network.
+                Manage your profile and stay connected with the GCELT alumni network.
               </p>
             </div>
           </div>
           <div className="mx-auto grid max-w-md items-start gap-8 mt-12">
-            {/* Removed Alumni Directory FeatureCard */}
-            {/* Removed Job Board FeatureCard */}
             <FeatureCard
               title="Profile Management"
               description="Keep your profile updated to stay connected and visible within the network."

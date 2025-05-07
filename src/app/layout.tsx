@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Gcelt Alumnilink',
-  description: 'College Alumni Portal for Gcelt.',
+  title: 'GCELT Alumnilink',
+  description: 'College Alumni Portal for GCELT.',
 };
 
 export default function RootLayout({

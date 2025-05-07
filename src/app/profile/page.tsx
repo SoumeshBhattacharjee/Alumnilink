@@ -14,7 +14,7 @@ export default function ProfilePage() {
     graduationYear: 2015,
     currentCompany: 'Tech Solutions Inc.',
     avatarUrl: 'https://picsum.photos/id/433/200/200',
-    bio: 'Passionate software engineer with a focus on web development and cloud technologies. Always eager to learn and connect with fellow Gcelt alumni.',
+    bio: 'Passionate software engineer with a focus on web development and cloud technologies. Always eager to learn and connect with fellow GCELT alumni.',
   };
 
   return (
