@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { User, Mail, Briefcase, CalendarDays, BookOpen, Users, Linkedin, UserPlus, MessageSquare } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import Link from 'next/link'; // Added Link import
 
 // Mock alumni data - in a real app, this would be fetched
 const mockAlumniData: { [key: string]: AlumniProfile } = {
@@ -58,7 +59,7 @@ export default function AlumniProfilePage() {
       <div className="flex flex-col items-center justify-center h-[calc(100vh-20rem)]">
         <h1 className="text-2xl font-semibold">Alumni Not Found</h1>
         <p className="text-muted-foreground">The profile you are looking for does not exist.</p>
-        <Link href="/alumni-search" className="mt-4">
+        <Link href="/connect-search" className="mt-4">
           <Button variant="outline">Back to Search</Button>
         </Link>
       </div>
@@ -204,4 +205,3 @@ function ProfileSkeleton() {
     </div>
   )
 }
-

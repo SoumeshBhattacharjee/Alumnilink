@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, UserCircle as UserCircleIcon, Users, Newspaper } from 'lucide-react';
+import { ArrowRight, UserCircle as UserCircleIcon, Users, Newspaper, ClipboardList, MessageSquare } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Home() {
@@ -52,26 +52,34 @@ export default function Home() {
             </div>
           </div>
           <div className="mx-auto grid max-w-5xl items-start gap-8 mt-12 sm:grid-cols-2 lg:grid-cols-3">
-            <FeatureCard
-              title="Profile Management"
-              description="Keep your profile updated to stay connected and visible within the network."
-              icon={<UserCircleIcon className="h-8 w-8 text-primary" />}
-              link="/profile"
-              linkLabel="Update Your Profile"
-            />
-            <FeatureCard
-              title="Alumni Search"
-              description="Find and connect with fellow GCELT graduates. Expand your professional network."
-              icon={<Users className="h-8 w-8 text-primary" />}
-              link="/alumni-search"
-              linkLabel="Search Alumni"
-            />
-            <FeatureCard
+             <FeatureCard
               title="Community Feed"
               description="Stay updated with news, events, and discussions from the alumni community."
               icon={<Newspaper className="h-8 w-8 text-primary" />}
               link="/feed"
               linkLabel="View Feed"
+            />
+            <FeatureCard
+              title="Connect & Search"
+              description="Find and connect with fellow GCELT graduates. Expand your professional network."
+              icon={<Users className="h-8 w-8 text-primary" />}
+              link="/connect-search"
+              linkLabel="Connect & Search"
+            />
+             <FeatureCard
+              title="Notice Board"
+              description="Check out important announcements and updates from the alumni association and college."
+              icon={<ClipboardList className="h-8 w-8 text-primary" />}
+              link="/notice-board"
+              linkLabel="View Notices"
+            />
+            {/* Removed Chat from landing page features as it's more of a direct interaction tool post-login */}
+             <FeatureCard
+              title="Your Profile"
+              description="Keep your profile updated to stay connected and visible within the network."
+              icon={<UserCircleIcon className="h-8 w-8 text-primary" />}
+              link="/profile" // This link might only be fully functional post-login
+              linkLabel="Manage Your Profile"
             />
           </div>
         </div>

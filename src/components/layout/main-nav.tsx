@@ -3,12 +3,13 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Home, Users, Newspaper } from 'lucide-react'; 
+import { Newspaper, ClipboardList, Users, MessageSquare } from 'lucide-react'; 
 
 const navItems = [
-  { href: '/', label: 'Home', icon: Home },
-  { href: '/alumni-search', label: 'Alumni Search', icon: Users },
   { href: '/feed', label: 'Feed', icon: Newspaper },
+  { href: '/notice-board', label: 'Notice Board', icon: ClipboardList },
+  { href: '/connect-search', label: 'Connect & Search', icon: Users },
+  { href: '/chat', label: 'Chat', icon: MessageSquare },
 ];
 
 export function MainNav() {
