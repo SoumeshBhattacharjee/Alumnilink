@@ -4,95 +4,95 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%; /* Light Sky Blue-Gray */
-    --foreground: 210 40% 10%; /* Dark Slate Blue */
+    --background: 30 80% 96%; /* Light Peach */
+    --foreground: 25 50% 25%; /* Dark Brown */
 
-    --card: 210 40% 96%; /* Lighter Sky Blue-Gray */
-    --card-foreground: 210 40% 10%; /* Dark Slate Blue */
+    --card: 30 70% 94%; /* Lighter Peach */
+    --card-foreground: 25 50% 25%; /* Dark Brown */
 
-    --popover: 210 40% 94%; /* Even Lighter Sky Blue-Gray */
-    --popover-foreground: 210 40% 10%; /* Dark Slate Blue */
+    --popover: 30 60% 92%; /* Even Lighter Peach */
+    --popover-foreground: 25 50% 25%; /* Dark Brown */
 
-    --primary: 210 80% 55%; /* Medium Blue */
-    --primary-foreground: 210 40% 98%; /* Very Light Blue-Gray (for text on primary) */
+    --primary: 25 85% 60%; /* Terracotta Orange */
+    --primary-foreground: 30 80% 98%; /* Very Light Peach (for text on primary) */
 
-    --secondary: 180 60% 45%; /* Teal */
-    --secondary-foreground: 180 40% 98%; /* Very Light Cyan (for text on secondary) */
+    --secondary: 120 30% 60%; /* Muted Green */
+    --secondary-foreground: 120 20% 98%; /* Very Light Green (for text on secondary) */
 
-    --muted: 210 20% 90%; /* Soft Light Blue-Gray */
-    --muted-foreground: 210 20% 45%; /* Medium Desaturated Blue-Gray */
+    --muted: 30 20% 90%; /* Soft Light Peach-Gray */
+    --muted-foreground: 30 20% 50%; /* Medium Desaturated Peach-Gray */
 
-    --accent: 200 80% 60%; /* Bright Sky Blue */
-    --accent-foreground: 210 40% 10%; /* Dark Slate Blue (for text on accent) */
+    --accent: 45 70% 65%; /* Warm Yellow-Orange */
+    --accent-foreground: 25 50% 25%; /* Dark Brown (for text on accent) */
 
-    --destructive: 0 70% 50%; /* Soft Red */
+    --destructive: 0 60% 55%; /* Muted Red */
     --destructive-foreground: 0 0% 98%; /* Very Light Gray (for text on destructive) */
 
-    --border: 210 20% 85%; /* Light Gray-Blue Border */
-    --input: 210 20% 92%; /* Very Light Gray-Blue Input Background */
-    --ring: 210 70% 65%; /* Brighter Medium Blue for Focus Ring */
+    --border: 30 30% 80%; /* Light Peach-Gray Border */
+    --input: 30 40% 92%; /* Very Light Peach-Gray Input Background */
+    --ring: 25 75% 70%; /* Brighter Terracotta Orange for Focus Ring */
 
     --radius: 0.5rem; /* Rounded corners */
 
-    --chart-1: 210 70% 50%; /* Blue */
-    --chart-2: 180 60% 45%; /* Teal */
-    --chart-3: 150 60% 45%; /* Green-Teal */
-    --chart-4: 45 80% 55%;  /* Orange-Yellow */
-    --chart-5: 30 80% 60%;  /* Orange */
+    --chart-1: 25 70% 55%;  /* Terracotta */
+    --chart-2: 120 35% 50%; /* Darker Muted Green */
+    --chart-3: 40 60% 50%;  /* Olive Green */
+    --chart-4: 20 50% 60%;  /* Light Brown */
+    --chart-5: 0 40% 70%;   /* Light Reddish Brown */
 
-    --sidebar-background: 210 30% 92%; /* Slightly Darker/Saturated Light Blue-Gray */
-    --sidebar-foreground: 210 30% 20%; /* Darker Slate Blue for Sidebar */
-    --sidebar-primary: 210 80% 55%; /* Same as primary */
-    --sidebar-primary-foreground: 210 40% 98%; /* Same as primary-foreground */
-    --sidebar-accent: 200 80% 60%; /* Same as accent */
-    --sidebar-accent-foreground: 210 40% 10%; /* Same as accent-foreground */
-    --sidebar-border: 210 20% 80%; /* Slightly Darker Gray-Blue Border for Sidebar */
-    --sidebar-ring: 210 70% 65%; /* Same as ring */
+    --sidebar-background: 30 40% 90%; /* Slightly Darker/Saturated Light Peach-Gray */
+    --sidebar-foreground: 25 40% 30%; /* Darker Brown for Sidebar */
+    --sidebar-primary: 25 85% 60%; /* Same as primary */
+    --sidebar-primary-foreground: 30 80% 98%; /* Same as primary-foreground */
+    --sidebar-accent: 45 70% 65%; /* Same as accent */
+    --sidebar-accent-foreground: 25 50% 25%; /* Same as accent-foreground */
+    --sidebar-border: 30 30% 75%; /* Slightly Darker Peach-Gray Border for Sidebar */
+    --sidebar-ring: 25 75% 70%; /* Same as ring */
   }
 
   .dark {
-    --background: 210 20% 12%; /* Dark Desaturated Blue */
-    --foreground: 210 40% 95%; /* Light Gray-Blue */
+    --background: 25 15% 15%; /* Dark Brown-Gray */
+    --foreground: 30 30% 85%; /* Light Peach-Gray */
 
-    --card: 210 20% 15%; /* Slightly Lighter Dark Blue */
-    --card-foreground: 210 40% 95%; /* Light Gray-Blue */
+    --card: 25 15% 18%; /* Slightly Lighter Dark Brown-Gray */
+    --card-foreground: 30 30% 85%; /* Light Peach-Gray */
 
-    --popover: 210 20% 18%; /* Darker Popover Blue */
-    --popover-foreground: 210 40% 95%; /* Light Gray-Blue */
+    --popover: 25 15% 22%; /* Darker Popover Brown-Gray */
+    --popover-foreground: 30 30% 85%; /* Light Peach-Gray */
 
-    --primary: 210 90% 65%; /* Brighter Blue for Dark Mode */
-    --primary-foreground: 210 20% 10%; /* Very Dark Blue (for text on primary) */
+    --primary: 25 75% 70%; /* Brighter Terracotta for Dark Mode */
+    --primary-foreground: 25 15% 10%; /* Very Dark Brown (for text on primary) */
 
-    --secondary: 180 70% 55%; /* Brighter Teal for Dark Mode */
-    --secondary-foreground: 180 20% 10%; /* Very Dark Cyan (for text on secondary) */
+    --secondary: 120 40% 70%; /* Brighter Muted Green for Dark Mode */
+    --secondary-foreground: 120 15% 10%; /* Very Dark Green (for text on secondary) */
 
-    --muted: 210 15% 25%; /* Dark Muted Blue */
-    --muted-foreground: 210 20% 70%; /* Lighter Muted Gray-Blue */
+    --muted: 25 10% 28%; /* Dark Muted Brown-Gray */
+    --muted-foreground: 30 20% 65%; /* Lighter Muted Peach-Gray */
 
-    --accent: 200 90% 70%; /* Brighter Sky Blue for Dark Mode */
-    --accent-foreground: 210 20% 10%; /* Very Dark Blue (for text on accent) */
+    --accent: 45 80% 75%; /* Brighter Yellow-Orange for Dark Mode */
+    --accent-foreground: 25 15% 10%; /* Very Dark Brown (for text on accent) */
 
-    --destructive: 0 70% 60%; /* Brighter Soft Red for Dark Mode */
+    --destructive: 0 60% 65%; /* Brighter Muted Red for Dark Mode */
     --destructive-foreground: 0 0% 98%; /* Very Light Gray */
 
-    --border: 210 15% 30%; /* Dark Gray-Blue Border */
-    --input: 210 15% 22%; /* Dark Input Background */
-    --ring: 210 80% 70%; /* Brighter Blue for Focus Ring */
+    --border: 25 10% 35%; /* Dark Brown-Gray Border */
+    --input: 25 10% 25%; /* Dark Input Background */
+    --ring: 25 70% 75%; /* Brighter Terracotta for Focus Ring */
     
-    --chart-1: 210 80% 65%;
-    --chart-2: 180 70% 60%;
-    --chart-3: 150 70% 60%;
-    --chart-4: 45 90% 65%;
-    --chart-5: 30 90% 70%;
+    --chart-1: 25 70% 65%;
+    --chart-2: 120 40% 60%;
+    --chart-3: 40 50% 55%;
+    --chart-4: 20 45% 65%;
+    --chart-5: 0 40% 75%;
     
-    --sidebar-background: 210 20% 18%; /* Slightly Lighter/Saturated Dark Blue */
-    --sidebar-foreground: 210 30% 85%; /* Lighter Gray-Blue for Sidebar */
-    --sidebar-primary: 210 90% 65%; /* Same as primary */
-    --sidebar-primary-foreground: 210 20% 10%; /* Same as primary-foreground */
-    --sidebar-accent: 200 90% 70%; /* Same as accent */
-    --sidebar-accent-foreground: 210 20% 10%; /* Same as accent-foreground */
-    --sidebar-border: 210 15% 35%; /* Darker Gray-Blue Border for Sidebar */
-    --sidebar-ring: 210 80% 70%; /* Same as ring */
+    --sidebar-background: 25 15% 22%; /* Slightly Lighter/Saturated Dark Brown-Gray */
+    --sidebar-foreground: 30 25% 80%; /* Lighter Peach-Gray for Sidebar */
+    --sidebar-primary: 25 75% 70%; /* Same as primary */
+    --sidebar-primary-foreground: 25 15% 10%; /* Same as primary-foreground */
+    --sidebar-accent: 45 80% 75%; /* Same as accent */
+    --sidebar-accent-foreground: 25 15% 10%; /* Same as accent-foreground */
+    --sidebar-border: 25 10% 40%; /* Darker Brown-Gray Border for Sidebar */
+    --sidebar-ring: 25 70% 75%; /* Same as ring */
   }
 }
 
@@ -102,6 +102,6 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
-    font-family: var(--font-geist-sans);
+    font-family: var(--font-inter); /* Changed from --font-geist-sans */
   }
 }
