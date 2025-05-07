@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, UserCircle as UserCircleIcon, Users, Newspaper, ClipboardList, Briefcase, Loader2 } from 'lucide-react';
+import { ArrowRight, UserCircle as UserCircleIcon, Users, Newspaper, ClipboardList, Briefcase, Loader2, MessageSquare } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
