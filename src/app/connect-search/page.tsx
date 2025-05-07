@@ -6,19 +6,23 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { Briefcase, CalendarDays, Search, UserPlus, MessageSquare } from 'lucide-react';
+import { Briefcase, CalendarDays, Search, UserPlus, MessageSquare, MapPin } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
 
 
 // Mock alumni data
-const mockAlumni = [
-  { id: '1', name: 'Jane Doe', avatarUrl: 'https://picsum.photos/seed/jane/200/200', graduationYear: 2016, department: 'Electronics & Comm. Engg.', currentCompany: 'Innovate Corp', dataAiHint: 'professional woman smiling' },
-  { id: '2', name: 'John Smith', avatarUrl: 'https://picsum.photos/seed/john/200/200', graduationYear: 2014, department: 'Mechanical Engineering', currentCompany: 'Tech Solutions LLC', dataAiHint: 'professional man glasses' },
-  { id: '3', name: 'Alice Brown', avatarUrl: 'https://picsum.photos/seed/alice/200/200', graduationYear: 2018, department: 'Civil Engineering', currentCompany: 'Creative Minds Agency', dataAiHint: 'woman software engineer' },
-  { id: '4', name: 'Bob Green', avatarUrl: 'https://picsum.photos/seed/bob/200/200', graduationYear: 2015, department: 'Electrical Engineering', currentCompany: 'Future Builders Co.', dataAiHint: 'man construction architect' },
-  { id: '5', name: 'Carol White', avatarUrl: 'https://picsum.photos/seed/carol/200/200', graduationYear: 2017, department: 'Information Technology', currentCompany: 'HealthFirst Ltd.', dataAiHint: 'doctor medical professional' },
-  { id: '6', name: 'David Black', avatarUrl: 'https://picsum.photos/seed/david/200/200', graduationYear: 2013, department: 'Leather Technology', currentCompany: 'Global Web Services', dataAiHint: 'man technology laptop' },
+const mockAlumni: Alumni[] = [
+  { id: '1', name: 'Priya Sharma', avatarUrl: 'https://picsum.photos/seed/priya/200/200', graduationYear: 2016, department: 'Electronics & Comm. Engg.', currentCompany: 'Innovate Corp', location: 'Bengaluru, India', dataAiHint: 'professional woman smiling' },
+  { id: '2', name: 'Rajesh Kumar', avatarUrl: 'https://picsum.photos/seed/rajeshk/200/200', graduationYear: 2014, department: 'Mechanical Engineering', currentCompany: 'Tech Solutions LLC', location: 'Mumbai, India', dataAiHint: 'professional man glasses' },
+  { id: '3', name: 'Ananya Singh', avatarUrl: 'https://picsum.photos/seed/ananya/200/200', graduationYear: 2018, department: 'Civil Engineering', currentCompany: 'Creative Minds Agency', location: 'Delhi, India', dataAiHint: 'woman software engineer' },
+  { id: '4', name: 'Amit Patel', avatarUrl: 'https://picsum.photos/seed/amit/200/200', graduationYear: 2015, department: 'Electrical Engineering', currentCompany: 'Future Builders Co.', location: 'Chennai, India', dataAiHint: 'man construction architect' },
+  { id: '5', name: 'Sunita Devi', avatarUrl: 'https://picsum.photos/seed/sunita/200/200', graduationYear: 2017, department: 'Information Technology', currentCompany: 'HealthFirst Ltd.', location: 'Hyderabad, India', dataAiHint: 'doctor medical professional' },
+  { id: '6', name: 'Vikram Das', avatarUrl: 'https://picsum.photos/seed/vikram/200/200', graduationYear: 2013, department: 'Leather Technology', currentCompany: 'Global Web Services', location: 'Pune, India', dataAiHint: 'man technology laptop' },
+  { id: '7', name: 'Deepika Iyer', avatarUrl: 'https://picsum.photos/seed/deepika/200/200', graduationYear: 2019, department: 'Computer Science & Engg.', currentCompany: 'Data Insights Inc.', location: 'Bengaluru, India', dataAiHint: 'woman data scientist' },
+  { id: '8', name: 'Arjun Reddy', avatarUrl: 'https://picsum.photos/seed/arjunr/200/200', graduationYear: 2012, department: 'Electronics & Comm. Engg.', currentCompany: 'Telecom Giant Corp', location: 'Noida, India', dataAiHint: 'man telecom engineer' },
+  { id: '9', name: 'Meera Menon', avatarUrl: 'https://picsum.photos/seed/meera/200/200', graduationYear: 2020, department: 'Information Technology', currentCompany: 'CyberSafe Solutions', location: 'Kochi, India', dataAiHint: 'woman cybersecurity' },
+  { id: '10', name: 'Rohan Gupta', avatarUrl: 'https://picsum.photos/seed/rohan/200/200', graduationYear: 2011, department: 'Mechanical Engineering', currentCompany: 'AutoInnovate Ltd.', location: 'Gurgaon, India', dataAiHint: 'man automotive design' },
 ];
 
 interface Alumni {
@@ -28,12 +32,13 @@ interface Alumni {
   graduationYear: number;
   department: string;
   currentCompany: string;
+  location: string;
   dataAiHint: string;
 }
 
 function AlumniCard({ alumni }: { alumni: Alumni }) {
   return (
-    <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
+    <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col">
       <CardHeader className="flex flex-row items-center space-x-4 pb-2">
         <Avatar className="h-16 w-16">
           <AvatarImage src={alumni.avatarUrl} alt={alumni.name} data-ai-hint={alumni.dataAiHint} />
@@ -41,10 +46,10 @@ function AlumniCard({ alumni }: { alumni: Alumni }) {
         </Avatar>
         <div>
           <CardTitle className="text-xl">{alumni.name}</CardTitle>
-          <CardDescription className="text-sm text-muted-foreground">GCELT Alumni - {alumni.department}</CardDescription>
+          <CardDescription className="text-sm text-muted-foreground">{alumni.department}</CardDescription>
         </div>
       </CardHeader>
-      <CardContent className="space-y-3 pt-2">
+      <CardContent className="space-y-2 pt-2 flex-grow">
         <div className="flex items-center text-sm text-muted-foreground">
           <CalendarDays className="mr-2 h-4 w-4 text-primary" />
           Graduated: {alumni.graduationYear}
@@ -53,7 +58,13 @@ function AlumniCard({ alumni }: { alumni: Alumni }) {
           <Briefcase className="mr-2 h-4 w-4 text-primary" />
           Works at: {alumni.currentCompany}
         </div>
-        <div className="flex space-x-2 pt-2">
+        <div className="flex items-center text-sm text-muted-foreground">
+          <MapPin className="mr-2 h-4 w-4 text-primary" />
+          {alumni.location}
+        </div>
+      </CardContent>
+      <CardContent className="pt-3 pb-4 border-t mt-auto">
+        <div className="flex space-x-2">
            <Link href={`/alumni/${alumni.id}`} passHref className="flex-1">
             <Button variant="outline" className="w-full">View Profile</Button>
           </Link>
@@ -79,7 +90,7 @@ function AlumniCardSkeleton() {
           <Skeleton className="h-4 w-48" />
         </div>
       </CardHeader>
-      <CardContent className="space-y-3 pt-2">
+      <CardContent className="space-y-2 pt-2 flex-grow">
         <div className="flex items-center text-sm">
           <Skeleton className="h-4 w-4 mr-2 rounded-full" />
           <Skeleton className="h-4 w-24" />
@@ -88,7 +99,13 @@ function AlumniCardSkeleton() {
           <Skeleton className="h-4 w-4 mr-2 rounded-full" />
           <Skeleton className="h-4 w-40" />
         </div>
-        <div className="flex space-x-2 pt-2">
+        <div className="flex items-center text-sm">
+          <Skeleton className="h-4 w-4 mr-2 rounded-full" />
+          <Skeleton className="h-4 w-32" />
+        </div>
+      </CardContent>
+      <CardContent className="pt-3 pb-4 border-t mt-auto">
+        <div className="flex space-x-2">
            <Skeleton className="h-10 flex-1" />
            <Skeleton className="h-10 w-10" />
            <Skeleton className="h-10 w-10" />
@@ -122,7 +139,8 @@ export default function ConnectSearchPage() {
       alumni.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       alumni.currentCompany.toLowerCase().includes(searchTerm.toLowerCase()) ||
       alumni.graduationYear.toString().includes(searchTerm) ||
-      alumni.department.toLowerCase().includes(searchTerm.toLowerCase())
+      alumni.department.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      alumni.location.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [searchTerm]);
 
@@ -155,7 +173,7 @@ export default function ConnectSearchPage() {
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
         <Input
           type="search"
-          placeholder="Search by name, company, department, or year..."
+          placeholder="Search by name, company, department, year, or location..."
           className="pl-10 pr-4 py-2 text-base"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
