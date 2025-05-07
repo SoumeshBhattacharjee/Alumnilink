@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, UserCircle as UserCircleIcon } from 'lucide-react';
+import { ArrowRight, UserCircle as UserCircleIcon, Users, Newspaper } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center text-center">
+    <div className="flex flex-col items-center text-center">
       <section className="w-full py-12 md:py-24 lg:py-32">
         <div className="container px-4 md:px-6">
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
@@ -15,14 +15,14 @@ export default function Home() {
                   Welcome to Alumnilink
                 </h1>
                 <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                  Connect with fellow alumni and stay engaged with your alma mater. Manage your profile and network within the GCELT community after you register.
+                  Your exclusive social network for GCELT alumni. Connect, network, search for fellow graduates, and stay updated with the community.
                 </p>
               </div>
             </div>
             <Image
-              src="https://picsum.photos/seed/alumni-portal/600/400"
+              src="https://picsum.photos/seed/alumni-social/600/400"
               alt="Alumni Network"
-              data-ai-hint="diverse students graduation"
+              data-ai-hint="diverse people networking"
               width={600}
               height={400}
               className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last lg:aspect-square shadow-lg"
@@ -37,17 +37,31 @@ export default function Home() {
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Your Alumni Hub</h2>
               <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Manage your profile and stay connected with the GCELT alumni network.
+                Discover features designed to help you connect and grow within the GCELT alumni network.
               </p>
             </div>
           </div>
-          <div className="mx-auto grid max-w-md items-start gap-8 mt-12">
+          <div className="mx-auto grid max-w-5xl items-start gap-8 mt-12 sm:grid-cols-2 lg:grid-cols-3">
             <FeatureCard
               title="Profile Management"
               description="Keep your profile updated to stay connected and visible within the network."
               icon={<UserCircleIcon className="h-8 w-8 text-primary" />}
               link="/profile"
               linkLabel="Update Your Profile"
+            />
+            <FeatureCard
+              title="Alumni Search"
+              description="Find and connect with fellow GCELT graduates. Expand your professional network."
+              icon={<Users className="h-8 w-8 text-primary" />}
+              link="/alumni-search"
+              linkLabel="Search Alumni"
+            />
+            <FeatureCard
+              title="Community Feed"
+              description="Stay updated with news, events, and discussions from the alumni community."
+              icon={<Newspaper className="h-8 w-8 text-primary" />}
+              link="/feed"
+              linkLabel="View Feed"
             />
           </div>
         </div>
@@ -66,14 +80,14 @@ interface FeatureCardProps {
 
 function FeatureCard({ icon, title, description, link, linkLabel }: FeatureCardProps) {
   return (
-    <div className="flex flex-col items-center text-center p-6 rounded-lg shadow-md bg-card">
+    <div className="flex flex-col items-center text-center p-6 rounded-lg shadow-md bg-card h-full">
       <div className="mb-4 rounded-full bg-primary/10 p-3 flex items-center justify-center">
         {icon}
       </div>
       <h3 className="text-xl font-bold mb-2">{title}</h3>
-      <p className="text-muted-foreground mb-4">{description}</p>
+      <p className="text-muted-foreground mb-4 flex-grow">{description}</p>
       <Link href={link} passHref>
-        <Button variant="link" className="text-primary">
+        <Button variant="link" className="text-primary mt-auto">
           {linkLabel} <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
       </Link>
