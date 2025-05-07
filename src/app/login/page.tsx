@@ -7,11 +7,13 @@ import { Label } from '@/components/ui/label';
 import { LogIn, Mail, Key } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation'; // For redirection
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +22,8 @@ export default function LoginPage() {
     console.log('Login attempt:', { email, password });
     await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API call
     setIsLoading(false);
-    // Redirect or show success/error message
+    // For now, bypass actual login and redirect to profile
+    router.push('/profile'); 
   };
 
   return (
@@ -43,7 +46,7 @@ export default function LoginPage() {
               <Input 
                 id="email" 
                 type="email" 
-                placeholder="m@example.com" 
+                placeholder="alumni.user@example.com" 
                 required 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -62,6 +65,7 @@ export default function LoginPage() {
               <Input 
                 id="password" 
                 type="password" 
+                placeholder="password"
                 required 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
