@@ -189,7 +189,7 @@ export default function ChatPage() {
   if (localStorage.getItem('isAuthenticated') !== 'true') return null;
 
   return (
-    <div className="flex flex-col h-[calc(100vh-10rem)] md:h-[calc(100vh-12rem)] max-w-6xl mx-auto">
+    <div className="flex flex-col h-[calc(100vh-10rem)] md:h-[calc(100vh-12rem)] max-w-7xl mx-auto">
       <div className="flex items-center justify-center text-center mb-6">
         <MessageSquare className="h-10 w-10 text-primary mr-3" />
         <div>
@@ -314,3 +314,4 @@ export default function ChatPage() {
     </div>
   );
 }
+
