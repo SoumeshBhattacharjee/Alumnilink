@@ -12,7 +12,7 @@ export default function Home() {
             <div className="flex flex-col justify-center space-y-4 text-left">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-                  Welcome to gcelt alumnilink
+                  Welcome to Alumnilink
                 </h1>
                 <p className="max-w-[600px] text-muted-foreground md:text-xl">
                   Connect with fellow alumni, explore career opportunities, and stay engaged with your alma mater.

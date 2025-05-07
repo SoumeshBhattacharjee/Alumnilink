@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'gcelt alumnilink',
+  title: 'Alumnilink',
   description: 'College Alumni Portal for Gcelt.',
 };
 
@@ -33,7 +33,7 @@ export default function RootLayout({
         className={cn(
           geistSans.variable,
           geistMono.variable,
-          'antialiased min-h-screen flex flex-col'
+          'antialiased min-h-screen flex flex-col font-sans'
         )}
       >
         <SiteHeader />
