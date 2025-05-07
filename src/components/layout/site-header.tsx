@@ -12,41 +12,35 @@ import { ThemeToggle } from '@/components/layout/theme-toggle';
 
 export default function SiteHeader() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [hasCheckedAuth, setHasCheckedAuth] = useState(false); // New state
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    const updateAuthStatus = () => {
-      const authStatus = localStorage.getItem('isAuthenticated') === 'true';
-      if (authStatus !== isAuthenticated) {
-        setIsAuthenticated(authStatus);
-      }
+    // Check auth status on initial mount
+    const initialAuthStatus = localStorage.getItem('isAuthenticated') === 'true';
+    setIsAuthenticated(initialAuthStatus);
+    setHasCheckedAuth(true); // Mark that auth status has been checked
+
+    // Listener for changes (e.g., login/logout from other tabs or custom events)
+    const handleAuthUpdate = () => {
+      setIsAuthenticated(localStorage.getItem('isAuthenticated') === 'true');
     };
 
-    updateAuthStatus();
+    window.addEventListener('storage', handleAuthUpdate);
+    // 'authChange' is a custom event dispatched after login/logout actions
+    window.addEventListener('authChange', handleAuthUpdate);
 
-    const handleStorageChange = (event: StorageEvent) => {
-      if (event.key === 'isAuthenticated') {
-        updateAuthStatus();
-      }
-    };
-    window.addEventListener('storage', handleStorageChange);
-
-    const handleCustomAuthChange = () => {
-      updateAuthStatus();
-    };
-    window.addEventListener('authChange', handleCustomAuthChange);
-
-
+    // Cleanup listeners on component unmount
     return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('authChange', handleCustomAuthChange);
+      window.removeEventListener('storage', handleAuthUpdate);
+      window.removeEventListener('authChange', handleAuthUpdate);
     };
-  }, [pathname, isAuthenticated]); 
+  }, []); // Empty dependency array: runs once on mount to set initial status and listeners
 
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
-    setIsAuthenticated(false);
+    // setIsAuthenticated(false); // handleAuthUpdate will take care of this via 'authChange'
     window.dispatchEvent(new CustomEvent('authChange')); 
     router.push('/login');
   };
@@ -61,44 +55,47 @@ export default function SiteHeader() {
             Alumnilink
           </span>
         </Link>
-        {isAuthenticated && !isAuthPage && <MainNav />}
+        {hasCheckedAuth && isAuthenticated && !isAuthPage && <MainNav />}
         <div className="flex flex-1 items-center justify-end space-x-2 md:space-x-4">
           <ThemeToggle />
-          <nav className="flex items-center space-x-1 md:space-x-2">
-            {isAuthenticated && !isAuthPage ? (
-              <>
-                <Link href="/profile">
-                  <Avatar className="h-8 w-8 cursor-pointer">
-                    <AvatarImage src="https://picsum.photos/id/237/200/200" alt="User Avatar" data-ai-hint="user avatar" />
-                    <AvatarFallback>
-                      <UserCircle className="h-5 w-5" />
-                    </AvatarFallback>
-                  </Avatar>
-                </Link>
-                <Button variant="ghost" onClick={handleLogout}>
-                  <LogOut className="mr-2 h-4 w-4" />
-                  Logout
-                </Button>
-              </>
-            ) : (
-              <>
-                <Link href="/login" passHref>
-                  <Button variant="ghost" size="sm">
-                    <LogIn className="mr-2 h-4 w-4" />
-                    Login
+          {hasCheckedAuth && ( // Only render auth-related buttons after checking status
+            <nav className="flex items-center space-x-1 md:space-x-2">
+              {isAuthenticated ? (
+                <>
+                  <Link href="/profile">
+                    <Avatar className="h-8 w-8 cursor-pointer">
+                      <AvatarImage src="https://picsum.photos/id/237/200/200" alt="User Avatar" data-ai-hint="user avatar" />
+                      <AvatarFallback>
+                        <UserCircle className="h-5 w-5" />
+                      </AvatarFallback>
+                    </Avatar>
+                  </Link>
+                  <Button variant="ghost" onClick={handleLogout}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
                   </Button>
-                </Link>
-                <Link href="/signup" passHref>
-                  <Button size="sm">
-                    <UserPlus className="mr-2 h-4 w-4" />
-                    Sign Up
-                  </Button>
-                </Link>
-              </>
-            )}
-          </nav>
+                </>
+              ) : (
+                <>
+                  <Link href="/login" passHref>
+                    <Button variant="ghost" size="sm">
+                      <LogIn className="mr-2 h-4 w-4" />
+                      Login
+                    </Button>
+                  </Link>
+                  <Link href="/signup" passHref>
+                    <Button size="sm">
+                      <UserPlus className="mr-2 h-4 w-4" />
+                      Sign Up
+                    </Button>
+                  </Link>
+                </>
+              )}
+            </nav>
+          )}
         </div>
       </div>
     </header>
   );
 }
+
