@@ -17,7 +17,7 @@ export function MainNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
+    <nav className="flex items-center space-x-6 text-sm font-medium">
       {navItems.map((item) => (
         <Link
           key={item.href}
