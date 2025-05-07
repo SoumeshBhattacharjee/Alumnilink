@@ -1,3 +1,6 @@
+import { Linkedin, Twitter, Facebook, Copyright } from 'lucide-react';
+import Link from 'next/link';
+
 export default function SiteFooter() {
   return (
     <footer className="py-6 md:px-8 md:py-0 border-t border-border/40 mt-12">
@@ -10,9 +13,20 @@ export default function SiteFooter() {
             This platform does not impersonate GCELT or any official body. All content and interactions are user-generated and the responsibility of the respective users.
             The platform administrators are not liable for any misinformation or misuse. Use of this platform is at your own risk.
           </p>
-           <p className="mt-2">
-            © {new Date().getFullYear()} Alumnilink. All rights reserved.
+           <p className="mt-2 flex items-center justify-center md:justify-start">
+            <Copyright className="h-3 w-3 mr-1" /> {new Date().getFullYear()} Alumnilink. All rights reserved.
           </p>
+        </div>
+        <div className="flex items-center space-x-4 mt-4 md:mt-0">
+          <Link href="#" aria-label="LinkedIn" className="text-muted-foreground hover:text-primary transition-colors">
+            <Linkedin className="h-5 w-5" />
+          </Link>
+          <Link href="#" aria-label="Twitter" className="text-muted-foreground hover:text-primary transition-colors">
+            <Twitter className="h-5 w-5" />
+          </Link>
+          <Link href="#" aria-label="Facebook" className="text-muted-foreground hover:text-primary transition-colors">
+            <Facebook className="h-5 w-5" />
+          </Link>
         </div>
       </div>
     </footer>
