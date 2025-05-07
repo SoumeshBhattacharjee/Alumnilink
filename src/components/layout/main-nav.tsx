@@ -23,15 +23,14 @@ export function MainNav() {
           key={item.href}
           href={item.href}
           className={cn(
-            'transition-colors hover:text-primary',
+            'transition-colors hover:text-primary flex items-center', // Added flex and items-center
             pathname === item.href ? 'text-primary' : 'text-foreground/60'
           )}
         >
-          <item.icon className="mr-2 inline-block h-4 w-4" />
+          <item.icon className="mr-1.5 h-4 w-4" /> {/* Adjusted margin */}
           {item.label}
         </Link>
       ))}
     </nav>
   );
 }
-
