@@ -1,10 +1,11 @@
+
 'use client';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { UserPlus, Mail, Key, User as UserIcon } from 'lucide-react'; 
+import { UserPlus, Mail, Key, User as UserIcon, CalendarClock,Hash } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -14,6 +15,8 @@ export default function SignupPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [batchYear, setBatchYear] = useState('');
+  const [rollNumber, setRollNumber] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
@@ -33,7 +36,7 @@ export default function SignupPage() {
       setIsLoading(false);
       return;
     }
-    console.log('Signup attempt:', { fullName, email, password });
+    console.log('Signup attempt:', { fullName, email, password, batchYear, rollNumber });
     await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
     
     // Simulate successful signup
@@ -85,6 +88,36 @@ export default function SignupPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="batchYear" className="flex items-center">
+                <CalendarClock className="mr-2 h-4 w-4 text-muted-foreground" />
+                Batch Year
+              </Label>
+              <Input 
+                id="batchYear" 
+                type="number" 
+                placeholder="e.g. 2015" 
+                required 
+                value={batchYear}
+                onChange={(e) => setBatchYear(e.target.value)}
+                autoComplete="off"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="rollNumber" className="flex items-center">
+                <Hash className="mr-2 h-4 w-4 text-muted-foreground" />
+                Roll Number
+              </Label>
+              <Input 
+                id="rollNumber" 
+                type="text" 
+                placeholder="Your college roll number" 
+                required 
+                value={rollNumber}
+                onChange={(e) => setRollNumber(e.target.value)}
+                autoComplete="off"
               />
             </div>
             <div className="space-y-2">
