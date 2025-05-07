@@ -8,20 +8,15 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { LogIn, UserCircle, LogOut, UserPlus } from 'lucide-react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { ThemeToggle } from '@/components/layout/theme-toggle';
 
 export default function SiteHeader() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Default to false, real auth will set this
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    // Function to update authentication status
     const updateAuthStatus = () => {
-      // Bypass login logic for now, consider the user always authenticated
-      // In a real app, this would check a token, session, etc.
-      // Forcing true for now to show authenticated state:
-      // setIsAuthenticated(true); 
-      // Reverted to localStorage check as per previous logic, but login/signup page still force true
       const authStatus = localStorage.getItem('isAuthenticated') === 'true';
       if (authStatus !== isAuthenticated) {
         setIsAuthenticated(authStatus);
@@ -61,14 +56,15 @@ export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center">
-        <Link href="/" className="ml-4 mr-6 flex items-center space-x-2"> {/* Added ml-4 */}
+        <Link href="/" className="ml-4 mr-6 flex items-center space-x-2">
           <span className="font-bold text-xl sm:inline-block">
             Alumnilink
           </span>
         </Link>
         {isAuthenticated && !isAuthPage && <MainNav />}
-        <div className="flex flex-1 items-center justify-end space-x-4">
-          <nav className="flex items-center space-x-2">
+        <div className="flex flex-1 items-center justify-end space-x-2 md:space-x-4">
+          <ThemeToggle />
+          <nav className="flex items-center space-x-1 md:space-x-2">
             {isAuthenticated && !isAuthPage ? (
               <>
                 <Link href="/profile">
@@ -87,13 +83,13 @@ export default function SiteHeader() {
             ) : (
               <>
                 <Link href="/login" passHref>
-                  <Button variant="ghost">
+                  <Button variant="ghost" size="sm">
                     <LogIn className="mr-2 h-4 w-4" />
                     Login
                   </Button>
                 </Link>
                 <Link href="/signup" passHref>
-                  <Button>
+                  <Button size="sm">
                     <UserPlus className="mr-2 h-4 w-4" />
                     Sign Up
                   </Button>

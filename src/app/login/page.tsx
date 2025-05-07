@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Button } from '@/components/ui/button';
@@ -18,7 +19,7 @@ export default function LoginPage() {
   // Redirect if already logged in
   useEffect(() => {
     if (localStorage.getItem('isAuthenticated') === 'true') {
-      router.push('/profile');
+      router.push('/feed'); // Changed from /profile to /feed
     }
   }, [router]);
 
@@ -34,8 +35,7 @@ export default function LoginPage() {
     // Dispatch a custom event so other components (like header) can react immediately
     window.dispatchEvent(new CustomEvent('authChange'));
     setIsLoading(false);
-    router.push('/profile'); 
-    // router.refresh(); // Not always necessary if state updates trigger re-render
+    router.push('/feed'); // Changed from /profile to /feed
   };
 
   return (

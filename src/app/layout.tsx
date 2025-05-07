@@ -1,19 +1,20 @@
 
 import type { Metadata } from 'next';
-import { Inter, Roboto_Mono } from 'next/font/google'; // Changed from Geist_Sans, Geist_Mono
+import { Inter, Roboto_Mono } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import SiteHeader from '@/components/layout/site-header';
 import SiteFooter from '@/components/layout/site-footer';
 import { cn } from '@/lib/utils';
+import { ThemeProvider } from '@/components/layout/theme-provider';
 
-const inter = Inter({ // Changed from GeistSans
-  variable: '--font-inter', // Changed from --font-geist-sans
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
 });
 
-const robotoMono = Roboto_Mono({ // Changed from GeistMono
-  variable: '--font-roboto-mono', // Changed from --font-geist-mono
+const robotoMono = Roboto_Mono({
+  variable: '--font-roboto-mono',
   subsets: ['latin'],
 });
 
@@ -30,19 +31,26 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        suppressHydrationWarning // Added suppressHydrationWarning to body as well, as the error hints at potential body attribute mismatches
+        suppressHydrationWarning 
         className={cn(
-          inter.variable, // Changed from geistSans.variable
-          robotoMono.variable, // Changed from geistMono.variable
+          inter.variable,
+          robotoMono.variable,
           'antialiased min-h-screen flex flex-col font-sans'
         )}
       >
-        <SiteHeader />
-        <main className="flex-grow container mx-auto px-4 py-8">
-          {children}
-        </main>
-        <SiteFooter />
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SiteHeader />
+          <main className="flex-grow container mx-auto px-4 py-8">
+            {children}
+          </main>
+          <SiteFooter />
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );
