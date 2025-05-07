@@ -4,9 +4,15 @@
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Newspaper, MessageCircle, ThumbsUp, Share2 } from 'lucide-react';
+import { Newspaper, MessageCircle, ThumbsUp, Share2, PlusCircle, Edit2, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogTrigger, DialogClose } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { useToast } from '@/hooks/use-toast';
 
 interface FeedItem {
   id: string;
@@ -22,7 +28,7 @@ interface FeedItem {
   comments: number;
 }
 
-const mockFeedItems: FeedItem[] = [
+const initialFeedItems: FeedItem[] = [
   {
     id: '1',
     userName: 'Alumni Connect Admin',
@@ -68,7 +74,77 @@ const mockFeedItems: FeedItem[] = [
   },
 ];
 
+// Placeholder for logged-in user details
+const currentUserName = "Alumni User";
+const currentUserAvatar = "https://picsum.photos/id/433/50/50";
+const currentUserAvatarFallback = "AU";
+
+
 export default function FeedPage() {
+  const [feedItems, setFeedItems] = useState<FeedItem[]>(initialFeedItems);
+  const [isPostDialogOpen, setIsPostDialogOpen] = useState(false);
+  const [editingPost, setEditingPost] = useState<FeedItem | null>(null);
+  const [postContent, setPostContent] = useState('');
+  const [postImageUrl, setPostImageUrl] = useState('');
+  const { toast } = useToast();
+
+  const openAddPostDialog = () => {
+    setEditingPost(null);
+    setPostContent('');
+    setPostImageUrl('');
+    setIsPostDialogOpen(true);
+  };
+
+  const openEditPostDialog = (post: FeedItem) => {
+    setEditingPost(post);
+    setPostContent(post.content);
+    setPostImageUrl(post.imageUrl || '');
+    setIsPostDialogOpen(true);
+  };
+
+  const handlePostSubmit = () => {
+    if (!postContent.trim()) {
+      toast({ title: "Error", description: "Post content cannot be empty.", variant: "destructive" });
+      return;
+    }
+
+    if (editingPost) {
+      // Edit existing post
+      setFeedItems(feedItems.map(item =>
+        item.id === editingPost.id
+          ? { ...item, content: postContent, imageUrl: postImageUrl || undefined, timestamp: "Edited: Just now" }
+          : item
+      ));
+      toast({ title: "Success", description: "Post updated successfully!" });
+    } else {
+      // Add new post
+      const newPost: FeedItem = {
+        id: String(Date.now()), // Simple unique ID
+        userName: currentUserName,
+        userAvatar: currentUserAvatar,
+        userAvatarFallback: currentUserAvatarFallback,
+        timestamp: 'Just now',
+        content: postContent,
+        imageUrl: postImageUrl || undefined,
+        imageAlt: postImageUrl ? 'User uploaded image' : undefined,
+        imageAiHint: postImageUrl ? 'user content' : undefined,
+        likes: 0,
+        comments: 0,
+      };
+      setFeedItems([newPost, ...feedItems]);
+      toast({ title: "Success", description: "Post created successfully!" });
+    }
+    setIsPostDialogOpen(false);
+    setPostContent('');
+    setPostImageUrl('');
+  };
+
+  const handleDeletePost = (postId: string) => {
+    setFeedItems(feedItems.filter(item => item.id !== postId));
+    toast({ title: "Success", description: "Post deleted successfully." });
+  };
+
+
   return (
     <div className="space-y-8">
       <div className="flex flex-col items-center text-center">
@@ -79,8 +155,58 @@ export default function FeedPage() {
         </p>
       </div>
 
+      <div className="max-w-2xl mx-auto">
+        <Button onClick={openAddPostDialog} className="w-full mb-6">
+          <PlusCircle className="mr-2 h-4 w-4" /> Create New Post
+        </Button>
+      </div>
+      
+      <Dialog open={isPostDialogOpen} onOpenChange={setIsPostDialogOpen}>
+        <DialogContent className="sm:max-w-[525px]">
+          <DialogHeader>
+            <DialogTitle>{editingPost ? 'Edit Post' : 'Create New Post'}</DialogTitle>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="post-content" className="text-right">
+                Content
+              </Label>
+              <Textarea
+                id="post-content"
+                value={postContent}
+                onChange={(e) => setPostContent(e.target.value)}
+                className="col-span-3"
+                placeholder="What's on your mind?"
+                rows={4}
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="post-image-url" className="text-right">
+                Image URL
+              </Label>
+              <Input
+                id="post-image-url"
+                value={postImageUrl}
+                onChange={(e) => setPostImageUrl(e.target.value)}
+                className="col-span-3"
+                placeholder="(Optional) Enter image URL"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button type="button" variant="outline">Cancel</Button>
+            </DialogClose>
+            <Button type="button" onClick={handlePostSubmit}>
+              {editingPost ? 'Save Changes' : 'Create Post'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+
       <div className="max-w-2xl mx-auto space-y-6">
-        {mockFeedItems.map((item) => (
+        {feedItems.map((item) => (
           <Card key={item.id} className="shadow-lg overflow-hidden">
             <CardHeader className="flex flex-row items-center space-x-3 p-4">
               <Avatar>
@@ -108,22 +234,41 @@ export default function FeedPage() {
               )}
             </CardContent>
             <CardFooter className="flex justify-between items-center p-4 border-t bg-muted/50">
-              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
-                <ThumbsUp className="mr-2 h-4 w-4" /> {item.likes} Likes
-              </Button>
-              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
-                <MessageCircle className="mr-2 h-4 w-4" /> {item.comments} Comments
-              </Button>
-              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
-                <Share2 className="mr-2 h-4 w-4" /> Share
-              </Button>
+              <div className="flex items-center space-x-1">
+                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
+                  <ThumbsUp className="mr-1.5 h-4 w-4" /> {item.likes}
+                </Button>
+                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
+                  <MessageCircle className="mr-1.5 h-4 w-4" /> {item.comments}
+                </Button>
+                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
+                  <Share2 className="mr-1.5 h-4 w-4" /> Share
+                </Button>
+              </div>
+              {/* Show Edit/Delete only for posts by current "logged-in" user or admin for simplicity */}
+              {(item.userName === currentUserName || item.userName === 'Alumni Connect Admin') && (
+                 <div className="flex items-center space-x-1">
+                    <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-blue-600" onClick={() => openEditPostDialog(item)}>
+                        <Edit2 className="mr-1.5 h-4 w-4" /> Edit
+                    </Button>
+                    <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-destructive" onClick={() => handleDeletePost(item.id)}>
+                        <Trash2 className="mr-1.5 h-4 w-4" /> Delete
+                    </Button>
+                 </div>
+              )}
             </CardFooter>
           </Card>
         ))}
          <div className="text-center py-4">
-            <Link href="/feed/all">
-                <Button variant="outline">View More Posts</Button>
-            </Link>
+            {feedItems.length > initialFeedItems.length || feedItems.length === 0 ? (
+                 <p className="text-muted-foreground text-sm">
+                    {feedItems.length === 0 ? "No posts yet. Be the first to share!" : "You've reached the end of the feed."}
+                 </p>
+            ) : (
+                <Link href="/feed/all">
+                    <Button variant="outline">View More Posts</Button>
+                </Link>
+            )}
         </div>
       </div>
     </div>
