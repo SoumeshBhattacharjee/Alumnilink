@@ -40,8 +40,9 @@ export default function SiteHeader() {
     router.push('/login');
   };
   
-  const isAuthPage = pathname === '/login' || pathname === '/signup';
-  const isAdminPage = pathname === '/admin';
+  const isAuthPage = pathname === '/login' || pathname === '/signup' || pathname === '/admin/login';
+  const isAdminRoute = pathname.startsWith('/admin');
+
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -51,7 +52,7 @@ export default function SiteHeader() {
             Alumnilink
           </span>
         </Link>
-        {hasCheckedAuth && isAuthenticated && !isAuthPage && !isAdminPage && <MainNav />}
+        {hasCheckedAuth && isAuthenticated && !isAuthPage && !isAdminRoute && <MainNav />}
         <div className="flex flex-1 items-center justify-end space-x-2 md:space-x-4">
           <ThemeToggle />
           {hasCheckedAuth && ( 
@@ -66,12 +67,7 @@ export default function SiteHeader() {
                       </AvatarFallback>
                     </Avatar>
                   </Link>
-                  <Link href="/admin" passHref>
-                    <Button variant="ghost" size="sm">
-                      <Shield className="mr-2 h-4 w-4" />
-                      Admin
-                    </Button>
-                  </Link>
+                  {/* Admin button removed from here, direct navigation to /admin or /admin/login */}
                   <Button variant="ghost" onClick={handleLogout}>
                     <LogOut className="mr-2 h-4 w-4" />
                     Logout
@@ -100,3 +96,4 @@ export default function SiteHeader() {
     </header>
   );
 }
+
