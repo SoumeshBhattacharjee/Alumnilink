@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, UserCircle as UserCircleIcon, Users, Newspaper, ClipboardList, Briefcase, Loader2, MessageSquare } from 'lucide-react';
+import { ArrowRight, UserCircle as UserCircleIcon, Users, Newspaper, ClipboardList, Briefcase, Loader2, MessageSquare, Shield } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -14,6 +14,8 @@ export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
+    // Simulate checking auth status
+    // In a real app, this would be an API call or check a secure token
     const authStatus = localStorage.getItem('isAuthenticated') === 'true';
     setIsAuthenticated(authStatus);
     if (authStatus) {
@@ -23,7 +25,7 @@ export default function Home() {
     }
   }, [router]);
 
-  if (isLoading && !isAuthenticated) { // Show loading only if not authenticated yet and loading
+  if (isLoading && !isAuthenticated) { 
     return (
       <div className="flex flex-col items-center justify-center min-h-[calc(100vh-12rem)]">
         <Loader2 className="h-12 w-12 animate-spin text-primary" />
@@ -32,8 +34,6 @@ export default function Home() {
     );
   }
   
-  // If authenticated, router.push will handle redirection, so this content won't show.
-  // If not authenticated and no longer loading, show the landing page.
   if (!isAuthenticated && !isLoading) {
     return (
       <div className="flex flex-col items-center text-center">
@@ -56,6 +56,11 @@ export default function Home() {
                   <Link href="/login">
                     <Button size="lg" variant="outline">
                       Member Login
+                    </Button>
+                  </Link>
+                  <Link href="/admin">
+                    <Button size="lg" variant="secondary">
+                      <Shield className="mr-2 h-5 w-5" /> Admin Login
                     </Button>
                   </Link>
                 </div>
@@ -132,7 +137,6 @@ export default function Home() {
     );
   }
 
-  // If authenticated and redirecting, or if loading and authenticated, return null or a loader
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-12rem)]">
       <Loader2 className="h-12 w-12 animate-spin text-primary" />
