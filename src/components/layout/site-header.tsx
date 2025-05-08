@@ -5,10 +5,18 @@ import Link from 'next/link';
 import { MainNav } from '@/components/layout/main-nav';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { LogIn, UserCircle, LogOut, UserPlus, Shield } from 'lucide-react';
+import { LogIn, UserCircle, LogOut, UserPlus, Shield, Settings, User } from 'lucide-react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 export default function SiteHeader() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -58,21 +66,38 @@ export default function SiteHeader() {
           {hasCheckedAuth && ( 
             <nav className="flex items-center space-x-1 md:space-x-2">
               {isAuthenticated ? (
-                <>
-                  <Link href="/profile">
-                    <Avatar className="h-8 w-8 cursor-pointer">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Avatar className="h-9 w-9 cursor-pointer">
                       <AvatarImage src="https://picsum.photos/id/433/200/200" alt="User Avatar" data-ai-hint="user avatar" />
                       <AvatarFallback>
                         <UserCircle className="h-5 w-5" />
                       </AvatarFallback>
                     </Avatar>
-                  </Link>
-                  {/* Admin button removed from here, direct navigation to /admin or /admin/login */}
-                  <Button variant="ghost" onClick={handleLogout}>
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Logout
-                  </Button>
-                </>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link href="/profile" className="flex items-center w-full">
+                        <User className="mr-2 h-4 w-4" />
+                        <span>Profile</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    {/* Optionally, add other items like Settings here */}
+                    {/* <DropdownMenuItem asChild>
+                       <Link href="/settings" className="flex items-center w-full">
+                        <Settings className="mr-2 h-4 w-4" />
+                        <span>Settings</span>
+                      </Link>
+                    </DropdownMenuItem> */}
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
+                      <LogOut className="mr-2 h-4 w-4" />
+                      <span>Logout</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               ) : (
                 <>
                   <Link href="/login" passHref>
