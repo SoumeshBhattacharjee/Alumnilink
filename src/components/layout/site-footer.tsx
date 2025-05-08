@@ -6,7 +6,6 @@ import Link from 'next/link';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -19,13 +18,13 @@ export default function SiteFooter() {
 
   const disclaimerText = (
     <>
-      <div>
+      <p>
         <strong>Disclaimer:</strong> This is an unofficial alumni platform for Government College of Engineering &amp; Leather Technology (GCELT) and is maintained by students/alumni independently.
-      </div>
-      <div>
+      </p>
+      <p>
         This platform does not impersonate GCELT or any official body. All content and interactions are user-generated and the responsibility of the respective users.
         The platform administrators are not liable for any misinformation or misuse. Use of this platform is at your own risk.
-      </div>
+      </p>
     </>
   );
 
@@ -45,9 +44,10 @@ export default function SiteFooter() {
                   <AlertTriangle className="h-5 w-5 mr-2 text-primary" /> Disclaimer
                 </DialogTitle>
               </DialogHeader>
-              <DialogDescription className="space-y-2 text-sm text-muted-foreground py-2">
+              {/* Replaced DialogDescription with a div to allow block content (multiple p tags) */}
+              <div className="space-y-2 text-sm text-muted-foreground py-2">
                 {disclaimerText}
-              </DialogDescription>
+              </div>
             </DialogContent>
           </Dialog>
            <p className="mt-2 flex items-center justify-center md:justify-start">
