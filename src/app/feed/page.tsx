@@ -26,15 +26,15 @@ interface FeedItem {
   imageAlt?: string;
   imageAiHint?: string;
   likes: number;
-  likedByCurrentUser?: boolean; // Added for like state
-  comments: number; // Represents comment count
+  likedByCurrentUser?: boolean;
+  comments: number; 
 }
 
 const initialFeedItems: FeedItem[] = [
   {
     id: '1',
     userName: 'Alumni Connect Admin',
-    userAvatar: 'https://picsum.photos/seed/admin/50/50',
+    userAvatar: 'https://picsum.photos/seed/admin-gcalum/50/50',
     userAvatarFallback: 'AD',
     timestamp: '2h ago',
     content: 'Welcome to the new GCELT Alumnilink platform! We are excited to launch this space for all our esteemed alumni to connect, network, and stay updated. Explore the features and let us know your feedback!',
@@ -78,6 +78,59 @@ const initialFeedItems: FeedItem[] = [
     likedByCurrentUser: true,
     comments: 12,
   },
+  {
+    id: '5',
+    userName: 'Vikram Aditya (Batch 2010, CSE)',
+    userAvatar: 'https://picsum.photos/seed/vikram-cse/50/50',
+    userAvatarFallback: 'VA',
+    timestamp: '1 week ago',
+    content: 'Our startup "CodeGenius" just secured Series A funding! 🎉 Looking to hire talented GCELT alumni for full-stack and data science roles. Check out our careers page: [link-to-careers]',
+    imageUrl: 'https://picsum.photos/seed/startup-funding/600/300',
+    imageAlt: 'Team celebrating funding round',
+    imageAiHint: 'startup team',
+    likes: 112,
+    likedByCurrentUser: false,
+    comments: 25,
+  },
+  {
+    id: '6',
+    userName: 'Sneha Reddy (Batch 2015, IT)',
+    userAvatar: 'https://picsum.photos/seed/sneha-it/50/50',
+    userAvatarFallback: 'SR',
+    timestamp: '10 days ago',
+    content: 'Organizing a virtual GCELT IT batch of 2015 reunion next month. DM me if you are interested in joining and haven\'t received the invite yet! Looking forward to catching up with everyone. 😊',
+    likes: 33,
+    likedByCurrentUser: true,
+    comments: 7,
+  },
+  {
+    id: '7',
+    userName: 'Prof. Amitava Ghosh (Faculty, ME Dept.)',
+    userAvatar: 'https://picsum.photos/seed/prof-ghosh/50/50',
+    userAvatarFallback: 'AG',
+    timestamp: '2 weeks ago',
+    content: 'Congratulations to the GCELT Robotics team for winning the inter-college championship! Proud of your hard work and innovation. The Mechanical Engineering department continues to shine.',
+    imageUrl: 'https://picsum.photos/seed/robotics-win/600/300',
+    imageAlt: 'Robotics team with trophy',
+    imageAiHint: 'students robotics',
+    likes: 89,
+    likedByCurrentUser: false,
+    comments: 15,
+  },
+  {
+    id: '8',
+    userName: 'Rina Das (Batch 2005, LT)',
+    userAvatar: 'https://picsum.photos/seed/rina-lt/50/50',
+    userAvatarFallback: 'RD',
+    timestamp: '3 weeks ago',
+    content: 'Sharing some memories from our Leather Technology workshop back in 2004. Such incredible times and learning experiences at GCELT! Who remembers Prof. Sen\'s classes? #ThrowbackThursday #GCELTMemories',
+    imageUrl: 'https://picsum.photos/seed/gctlt-workshop/600/300',
+    imageAlt: 'Old workshop photo',
+    imageAiHint: 'vintage workshop',
+    likes: 67,
+    likedByCurrentUser: false,
+    comments: 11,
+  }
 ];
 
 // Placeholder for logged-in user details
@@ -327,3 +380,4 @@ export default function FeedPage() {
     </div>
   );
 }
+
