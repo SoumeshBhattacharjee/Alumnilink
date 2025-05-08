@@ -61,7 +61,7 @@ export default function SiteHeader() {
             Alumnilink
           </span>
           {/* College Identifier */}
-          <span className="text-sm text-muted-foreground font-medium hidden sm:inline-block border-l border-border/60 pl-2 ml-1 py-1">
+          <span className="text-sm text-muted-foreground font-medium inline-block border-l border-border/60 pl-2 ml-1 py-1">
             GCELT
           </span>
         </Link>
@@ -126,3 +126,4 @@ export default function SiteHeader() {
     </header>
   );
 }
+
