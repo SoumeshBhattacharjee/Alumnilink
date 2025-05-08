@@ -28,7 +28,7 @@ const mockJobPostings: JobPosting[] = [
     location: 'Bengaluru, India',
     postedDate: 'July 20, 2024',
     description: 'Join our dynamic team to build next-generation web applications using React and TypeScript. 5+ years of experience required. Strong understanding of modern frontend frameworks and best practices.',
-    postedBy: 'Jane Doe (ECE, 2016)',
+    postedBy: 'Jane Doe (CSE, 2016)', // Was ECE
     referralInfo: 'Referred by Jane. Mention her name in your application.',
     applyLink: '#',
     type: 'Full-time',
@@ -46,12 +46,12 @@ const mockJobPostings: JobPosting[] = [
   },
   {
     id: '3',
-    title: 'Mechanical Design Intern',
-    company: 'Precision Engineering Co.',
+    title: 'IT Support Intern', // Was Mechanical Design Intern
+    company: 'Precision IT Solutions', // Was Precision Engineering Co.
     location: 'Kolkata, India',
     postedDate: 'July 15, 2024',
-    description: 'Gain hands-on experience in mechanical design, CAD modeling, and prototyping. Ideal for recent GCELT graduates or final year students in Mechanical Engineering.',
-    postedBy: 'John Smith (ME, 2014)',
+    description: 'Gain hands-on experience in IT support, network troubleshooting, and system administration. Ideal for recent GCELT graduates or final year students in IT or CSE.',
+    postedBy: 'John Smith (IT, 2018)', // Was ME, 2014
     referralInfo: 'Reach out to John Smith on Alumnilink for a referral.',
     type: 'Internship',
   },
@@ -64,6 +64,26 @@ const mockJobPostings: JobPosting[] = [
     description: 'Looking for a creative Marketing Specialist to develop and execute marketing campaigns. Experience in digital marketing and content creation is a plus.',
     applyLink: '#',
     type: 'Part-time',
+  },
+   {
+    id: '5',
+    title: 'Leather Technologist',
+    company: 'Artisan Leather Goods',
+    location: 'Kanpur, India',
+    postedDate: 'July 25, 2024',
+    description: 'Seeking a skilled Leather Technologist for our production unit. Experience in quality control and sustainable tanning methods preferred. GCELT LT alumni welcome.',
+    postedBy: 'Aisha Khan (LT, 2015)',
+    applyLink: '#',
+    type: 'Full-time',
+  },
+  {
+    id: '6',
+    title: 'Junior Software Developer (React)',
+    company: 'StartupX Solutions',
+    location: 'Remote',
+    postedDate: 'July 26, 2024',
+    description: 'Entry-level position for a React developer. Work on exciting new projects. Must have a portfolio or GitHub profile. GCELT CSE grads are encouraged to apply.',
+    type: 'Full-time',
   },
 ];
 

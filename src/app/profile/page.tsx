@@ -14,12 +14,14 @@ import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogTrigger, DialogClose } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
 
 interface UserProfile {
   name: string;
   email: string;
   graduationYear: number;
-  department: string;
+  department: 'CSE' | 'LT' | 'IT'; // Department type
   currentCompany: string;
   currentRole: string;
   location: string;
@@ -33,7 +35,7 @@ const initialUserProfile: UserProfile = {
   name: 'Alumni User',
   email: 'alumni.user@example.com',
   graduationYear: 2015,
-  department: 'Computer Science & Engineering',
+  department: 'CSE', // Defaulted to CSE
   currentCompany: 'Tech Solutions Inc.',
   currentRole: 'Senior Software Engineer',
   location: 'Kolkata, India',
@@ -50,6 +52,8 @@ export default function ProfilePage() {
   const [isLoadingUser, setIsLoadingUser] = useState(true);
   const [user, setUser] = useState<UserProfile>(initialUserProfile);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  
+  // Ensure formData also respects the UserProfile department type
   const [formData, setFormData] = useState<Omit<UserProfile, 'skills'> & { skills: string }>({
     ...initialUserProfile,
     skills: initialUserProfile.skills.join(', '),
@@ -74,6 +78,11 @@ export default function ProfilePage() {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: name === 'graduationYear' ? (value === '' ? '' : Number(value)) : value }));
   };
+  
+  const handleDepartmentChange = (value: 'CSE' | 'LT' | 'IT') => {
+    setFormData(prev => ({ ...prev, department: value }));
+  };
+
 
   const handleSaveChanges = () => {
     const skillsArray = formData.skills.split(',').map(s => s.trim()).filter(s => s);
@@ -133,7 +142,16 @@ export default function ProfilePage() {
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="department" className="text-right">Department</Label>
-                        <Input id="department" name="department" value={formData.department} onChange={handleInputChange} className="col-span-3" />
+                         <Select value={formData.department} onValueChange={handleDepartmentChange}>
+                            <SelectTrigger className="col-span-3">
+                                <SelectValue placeholder="Select department" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="CSE">CSE</SelectItem>
+                                <SelectItem value="IT">IT</SelectItem>
+                                <SelectItem value="LT">LT</SelectItem>
+                            </SelectContent>
+                        </Select>
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="currentCompany" className="text-right">Company</Label>
@@ -157,7 +175,7 @@ export default function ProfilePage() {
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="linkedin" className="text-right">LinkedIn</Label>
-                        <Input id="linkedin" name="linkedin" value={formData.linkedin} onChange={handleInputChange} className="col-span-3" placeholder="https://linkedin.com/in/yourprofile"/>
+                        <Input id="linkedin" name="linkedin" value={formData.linkedin || ''} onChange={handleInputChange} className="col-span-3" placeholder="https://linkedin.com/in/yourprofile"/>
                     </div>
                 </div>
                 <DialogFooter>

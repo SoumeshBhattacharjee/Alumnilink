@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
@@ -13,16 +14,16 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 // Mock alumni data
 const mockAlumni: Alumni[] = [
-  { id: '1', name: 'Priya Sharma', avatarUrl: 'https://picsum.photos/seed/priya/200/200', graduationYear: 2016, department: 'Electronics & Comm. Engg.', currentCompany: 'Innovate Corp', location: 'Bengaluru, India', dataAiHint: 'professional woman smiling' },
-  { id: '2', name: 'Rajesh Kumar', avatarUrl: 'https://picsum.photos/seed/rajeshk/200/200', graduationYear: 2014, department: 'Mechanical Engineering', currentCompany: 'Tech Solutions LLC', location: 'Mumbai, India', dataAiHint: 'professional man glasses' },
-  { id: '3', name: 'Ananya Singh', avatarUrl: 'https://picsum.photos/seed/ananya/200/200', graduationYear: 2018, department: 'Civil Engineering', currentCompany: 'Creative Minds Agency', location: 'Delhi, India', dataAiHint: 'woman software engineer' },
-  { id: '4', name: 'Amit Patel', avatarUrl: 'https://picsum.photos/seed/amit/200/200', graduationYear: 2015, department: 'Electrical Engineering', currentCompany: 'Future Builders Co.', location: 'Chennai, India', dataAiHint: 'man construction architect' },
-  { id: '5', name: 'Sunita Devi', avatarUrl: 'https://picsum.photos/seed/sunita/200/200', graduationYear: 2017, department: 'Information Technology', currentCompany: 'HealthFirst Ltd.', location: 'Hyderabad, India', dataAiHint: 'doctor medical professional' },
-  { id: '6', name: 'Vikram Das', avatarUrl: 'https://picsum.photos/seed/vikram/200/200', graduationYear: 2013, department: 'Leather Technology', currentCompany: 'Global Web Services', location: 'Pune, India', dataAiHint: 'man technology laptop' },
-  { id: '7', name: 'Deepika Iyer', avatarUrl: 'https://picsum.photos/seed/deepika/200/200', graduationYear: 2019, department: 'Computer Science & Engg.', currentCompany: 'Data Insights Inc.', location: 'Bengaluru, India', dataAiHint: 'woman data scientist' },
-  { id: '8', name: 'Arjun Reddy', avatarUrl: 'https://picsum.photos/seed/arjunr/200/200', graduationYear: 2012, department: 'Electronics & Comm. Engg.', currentCompany: 'Telecom Giant Corp', location: 'Noida, India', dataAiHint: 'man telecom engineer' },
-  { id: '9', name: 'Meera Menon', avatarUrl: 'https://picsum.photos/seed/meera/200/200', graduationYear: 2020, department: 'Information Technology', currentCompany: 'CyberSafe Solutions', location: 'Kochi, India', dataAiHint: 'woman cybersecurity' },
-  { id: '10', name: 'Rohan Gupta', avatarUrl: 'https://picsum.photos/seed/rohan/200/200', graduationYear: 2011, department: 'Mechanical Engineering', currentCompany: 'AutoInnovate Ltd.', location: 'Gurgaon, India', dataAiHint: 'man automotive design' },
+  { id: '1', name: 'Priya Sharma', avatarUrl: 'https://picsum.photos/seed/priya/200/200', graduationYear: 2016, department: 'CSE', currentCompany: 'Innovate Corp', location: 'Bengaluru, India', dataAiHint: 'professional woman smiling' },
+  { id: '2', name: 'Rajesh Kumar', avatarUrl: 'https://picsum.photos/seed/rajeshk/200/200', graduationYear: 2014, department: 'IT', currentCompany: 'Tech Solutions LLC', location: 'Mumbai, India', dataAiHint: 'professional man glasses' },
+  { id: '3', name: 'Ananya Singh', avatarUrl: 'https://picsum.photos/seed/ananya/200/200', graduationYear: 2018, department: 'LT', currentCompany: 'Creative Leather Goods', location: 'Delhi, India', dataAiHint: 'woman software engineer' },
+  { id: '4', name: 'Amit Patel', avatarUrl: 'https://picsum.photos/seed/amit/200/200', graduationYear: 2015, department: 'CSE', currentCompany: 'Future Software Co.', location: 'Chennai, India', dataAiHint: 'man construction architect' },
+  { id: '5', name: 'Sunita Devi', avatarUrl: 'https://picsum.photos/seed/sunita/200/200', graduationYear: 2017, department: 'IT', currentCompany: 'HealthFirst Ltd.', location: 'Hyderabad, India', dataAiHint: 'doctor medical professional' },
+  { id: '6', name: 'Vikram Das', avatarUrl: 'https://picsum.photos/seed/vikram/200/200', graduationYear: 2013, department: 'LT', currentCompany: 'Global Leather Exports', location: 'Pune, India', dataAiHint: 'man technology laptop' },
+  { id: '7', name: 'Deepika Iyer', avatarUrl: 'https://picsum.photos/seed/deepika/200/200', graduationYear: 2019, department: 'CSE', currentCompany: 'Data Insights Inc.', location: 'Bengaluru, India', dataAiHint: 'woman data scientist' },
+  { id: '8', name: 'Arjun Reddy', avatarUrl: 'https://picsum.photos/seed/arjunr/200/200', graduationYear: 2012, department: 'IT', currentCompany: 'SecureNet Solutions', location: 'Noida, India', dataAiHint: 'man telecom engineer' },
+  { id: '9', name: 'Meera Menon', avatarUrl: 'https://picsum.photos/seed/meera/200/200', graduationYear: 2020, department: 'IT', currentCompany: 'CyberSafe Solutions', location: 'Kochi, India', dataAiHint: 'woman cybersecurity' },
+  { id: '10', name: 'Rohan Gupta', avatarUrl: 'https://picsum.photos/seed/rohan/200/200', graduationYear: 2011, department: 'CSE', currentCompany: 'GameDev Studios', location: 'Gurgaon, India', dataAiHint: 'man automotive design' },
 ];
 
 interface Alumni {
@@ -30,7 +31,7 @@ interface Alumni {
   name: string;
   avatarUrl: string;
   graduationYear: number;
-  department: string;
+  department: 'CSE' | 'LT' | 'IT'; // Updated department type
   currentCompany: string;
   location: string;
   dataAiHint: string;
@@ -192,3 +193,4 @@ export default function ConnectSearchPage() {
     </div>
   );
 }
+

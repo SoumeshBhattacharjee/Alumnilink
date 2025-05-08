@@ -44,13 +44,13 @@ const initialFeedItems: FeedItem[] = [
   },
   {
     id: '2',
-    userName: 'Priya Sharma (Batch 2012, ECE)',
+    userName: 'Priya Sharma (Batch 2016, CSE)', // Was ECE
     userAvatar: 'https://picsum.photos/seed/priya/50/50',
     userAvatarFallback: 'PS',
     timestamp: 'Yesterday',
-    content: 'Just attended an amazing webinar on AI in Healthcare. Highly recommend it to fellow tech enthusiasts! It\'s great to see how far our field has progressed. #AI #Healthcare #GCELTAlumni',
+    content: 'Just attended an amazing webinar on AI in Software Development. Highly recommend it to fellow tech enthusiasts! It\'s great to see how far our field has progressed. #AI #SoftwareDev #GCELTAlumni',
     imageUrl: 'https://picsum.photos/seed/ai-webinar/600/300',
-    imageAlt: 'AI in Healthcare Webinar Thumbnail',
+    imageAlt: 'AI in Software Development Webinar Thumbnail',
     imageAiHint: 'technology webinar',
     likes: 42,
     likedByCurrentUser: true,
@@ -58,18 +58,18 @@ const initialFeedItems: FeedItem[] = [
   },
   {
     id: '3',
-    userName: 'Rajesh Kumar (Batch 2008, ME)',
+    userName: 'Rajesh Kumar (Batch 2014, IT)', // Was ME
     userAvatar: 'https://picsum.photos/seed/rajesh/50/50',
     userAvatarFallback: 'RK',
     timestamp: '3 days ago',
-    content: 'Looking for collaborators on a new sustainable energy project. If you have experience in renewable tech or project management, please reach out. Let\'s innovate together! #Sustainability #Engineering #Collaboration',
+    content: 'Looking for collaborators on a new cloud infrastructure project. If you have experience in AWS/Azure or DevOps, please reach out. Let\'s innovate together! #CloudInfra #IT #Collaboration',
     likes: 28,
     likedByCurrentUser: false,
     comments: 5,
   },
   {
     id: '4',
-    userName: 'Ananya Singh (Batch 2019, LT)',
+    userName: 'Ananya Singh (Batch 2018, LT)', // LT is fine
     userAvatar: 'https://picsum.photos/seed/ananya/50/50',
     userAvatarFallback: 'AS',
     timestamp: '5 days ago',
@@ -80,7 +80,7 @@ const initialFeedItems: FeedItem[] = [
   },
   {
     id: '5',
-    userName: 'Vikram Aditya (Batch 2010, CSE)',
+    userName: 'Vikram Aditya (Batch 2010, CSE)', // CSE is fine
     userAvatar: 'https://picsum.photos/seed/vikram-cse/50/50',
     userAvatarFallback: 'VA',
     timestamp: '1 week ago',
@@ -94,36 +94,36 @@ const initialFeedItems: FeedItem[] = [
   },
   {
     id: '6',
-    userName: 'Sneha Reddy (Batch 2015, IT)',
+    userName: 'Sneha Reddy (Batch 2017, IT)', // IT is fine
     userAvatar: 'https://picsum.photos/seed/sneha-it/50/50',
     userAvatarFallback: 'SR',
     timestamp: '10 days ago',
-    content: 'Organizing a virtual GCELT IT batch of 2015 reunion next month. DM me if you are interested in joining and haven\'t received the invite yet! Looking forward to catching up with everyone. 😊',
+    content: 'Organizing a virtual GCELT IT batch of 2017 reunion next month. DM me if you are interested in joining and haven\'t received the invite yet! Looking forward to catching up with everyone. 😊',
     likes: 33,
     likedByCurrentUser: true,
     comments: 7,
   },
   {
     id: '7',
-    userName: 'Prof. Amitava Ghosh (Faculty, ME Dept.)',
+    userName: 'Prof. Amitava Ghosh (Faculty, CSE Dept.)', // Was ME Dept.
     userAvatar: 'https://picsum.photos/seed/prof-ghosh/50/50',
     userAvatarFallback: 'AG',
     timestamp: '2 weeks ago',
-    content: 'Congratulations to the GCELT Robotics team for winning the inter-college championship! Proud of your hard work and innovation. The Mechanical Engineering department continues to shine.',
-    imageUrl: 'https://picsum.photos/seed/robotics-win/600/300',
-    imageAlt: 'Robotics team with trophy',
-    imageAiHint: 'students robotics',
+    content: 'Congratulations to the GCELT Coding Club for winning the inter-college hackathon! Proud of your hard work and innovation. The CSE department continues to shine.',
+    imageUrl: 'https://picsum.photos/seed/coding-win/600/300',
+    imageAlt: 'Coding club with trophy',
+    imageAiHint: 'students coding',
     likes: 89,
     likedByCurrentUser: false,
     comments: 15,
   },
   {
     id: '8',
-    userName: 'Rina Das (Batch 2005, LT)',
+    userName: 'Rina Das (Batch 2013, LT)', // LT is fine
     userAvatar: 'https://picsum.photos/seed/rina-lt/50/50',
     userAvatarFallback: 'RD',
     timestamp: '3 weeks ago',
-    content: 'Sharing some memories from our Leather Technology workshop back in 2004. Such incredible times and learning experiences at GCELT! Who remembers Prof. Sen\'s classes? #ThrowbackThursday #GCELTMemories',
+    content: 'Sharing some memories from our Leather Technology workshop back in 2012. Such incredible times and learning experiences at GCELT! Who remembers Prof. Sen\'s classes? #ThrowbackThursday #GCELTMemories',
     imageUrl: 'https://picsum.photos/seed/gctlt-workshop/600/300',
     imageAlt: 'Old workshop photo',
     imageAiHint: 'vintage workshop',
