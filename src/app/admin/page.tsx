@@ -36,7 +36,7 @@ export default function AdminPage() {
     const authStatus = localStorage.getItem('isAuthenticated');
     // In a real app, you'd also check for admin role here
     if (authStatus !== 'true') {
-      router.push('/login');
+      router.push('/admin/login'); // Redirect to admin login page
     } else {
       setIsLoading(false);
     }
@@ -51,7 +51,7 @@ export default function AdminPage() {
           <Skeleton className="h-5 w-72" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[...Array(6)].map((_, i) => (
+          {[...Array(9)].map((_, i) => ( // Increased to 9 to match actual cards
             <Card key={i}>
               <CardHeader className="flex flex-row items-center space-x-3 pb-3">
                 <Skeleton className="h-10 w-10 rounded-full" />

@@ -15,16 +15,18 @@ export default function Home() {
 
   useEffect(() => {
     // Simulate checking auth status
-    // In a real app, this would be an API call or check a secure token
     const authStatus = localStorage.getItem('isAuthenticated') === 'true';
     setIsAuthenticated(authStatus);
     if (authStatus) {
+      // If authenticated, immediately redirect to feed, bypassing landing page content for logged-in users.
       router.push('/feed');
     } else {
       setIsLoading(false);
     }
   }, [router]);
 
+  // This loading state is primarily for when the user is not authenticated yet,
+  // or if the auth check is in progress.
   if (isLoading && !isAuthenticated) { 
     return (
       <div className="flex flex-col items-center justify-center min-h-[calc(100vh-12rem)]">
@@ -34,6 +36,7 @@ export default function Home() {
     );
   }
   
+  // Show landing page content only if not authenticated and not loading
   if (!isAuthenticated && !isLoading) {
     return (
       <div className="flex flex-col items-center text-center">
@@ -58,7 +61,7 @@ export default function Home() {
                       Member Login
                     </Button>
                   </Link>
-                  <Link href="/admin">
+                  <Link href="/admin/login">
                     <Button size="lg" variant="secondary">
                       <Shield className="mr-2 h-5 w-5" /> Admin Login
                     </Button>
@@ -137,10 +140,12 @@ export default function Home() {
     );
   }
 
+  // This state is reached if user is authenticated and router.push('/feed') is still processing.
+  // Or if isLoading became false but isAuthenticated also became true within the same render cycle.
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-12rem)]">
       <Loader2 className="h-12 w-12 animate-spin text-primary" />
-      <p className="mt-4 text-muted-foreground">Loading Alumnilink...</p>
+      <p className="mt-4 text-muted-foreground">Redirecting...</p>
     </div>
   );
 }
