@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
 
 interface FeedItem {
   id: string;
@@ -25,7 +26,8 @@ interface FeedItem {
   imageAlt?: string;
   imageAiHint?: string;
   likes: number;
-  comments: number;
+  likedByCurrentUser?: boolean; // Added for like state
+  comments: number; // Represents comment count
 }
 
 const initialFeedItems: FeedItem[] = [
@@ -37,6 +39,7 @@ const initialFeedItems: FeedItem[] = [
     timestamp: '2h ago',
     content: 'Welcome to the new GCELT Alumnilink platform! We are excited to launch this space for all our esteemed alumni to connect, network, and stay updated. Explore the features and let us know your feedback!',
     likes: 15,
+    likedByCurrentUser: false,
     comments: 3,
   },
   {
@@ -50,6 +53,7 @@ const initialFeedItems: FeedItem[] = [
     imageAlt: 'AI in Healthcare Webinar Thumbnail',
     imageAiHint: 'technology webinar',
     likes: 42,
+    likedByCurrentUser: true,
     comments: 8,
   },
   {
@@ -60,6 +64,7 @@ const initialFeedItems: FeedItem[] = [
     timestamp: '3 days ago',
     content: 'Looking for collaborators on a new sustainable energy project. If you have experience in renewable tech or project management, please reach out. Let\'s innovate together! #Sustainability #Engineering #Collaboration',
     likes: 28,
+    likedByCurrentUser: false,
     comments: 5,
   },
   {
@@ -70,6 +75,7 @@ const initialFeedItems: FeedItem[] = [
     timestamp: '5 days ago',
     content: 'Thrilled to share that my research paper on innovative leather tanning processes has been published! Thanks to all my mentors at GCELT for their guidance. You can read it here: [link to paper]',
     likes: 55,
+    likedByCurrentUser: true,
     comments: 12,
   },
 ];
@@ -129,6 +135,7 @@ export default function FeedPage() {
         imageAlt: postImageUrl ? 'User uploaded image' : undefined,
         imageAiHint: postImageUrl ? 'user content' : undefined,
         likes: 0,
+        likedByCurrentUser: false,
         comments: 0,
       };
       setFeedItems([newPost, ...feedItems]);
@@ -140,8 +147,44 @@ export default function FeedPage() {
   };
 
   const handleDeletePost = (postId: string) => {
-    setFeedItems(feedItems.filter(item => item.id !== postId));
-    toast({ title: "Success", description: "Post deleted successfully." });
+    // Confirm deletion
+     const confirmDelete = window.confirm("Are you sure you want to delete this post?");
+    if (confirmDelete) {
+        setFeedItems(feedItems.filter(item => item.id !== postId));
+        toast({ title: "Success", description: "Post deleted successfully." });
+    }
+  };
+  
+  const handleLikePost = (postId: string) => {
+    setFeedItems(prevItems =>
+      prevItems.map(item => {
+        if (item.id === postId) {
+          const alreadyLiked = !!item.likedByCurrentUser;
+          return {
+            ...item,
+            likes: alreadyLiked ? item.likes - 1 : item.likes + 1,
+            likedByCurrentUser: !alreadyLiked,
+          };
+        }
+        return item;
+      })
+    );
+  };
+
+  const handleCommentPost = (postId: string) => { 
+    setFeedItems(prevItems =>
+      prevItems.map(item => {
+        if (item.id === postId) {
+          return {
+            ...item,
+            // For demo, just incrementing count. A real app would open a comment modal/input.
+            comments: item.comments + 1, 
+          };
+        }
+        return item;
+      })
+    );
+    toast({ title: "Comment Action (Demo)", description: "Comment count incremented. Full commenting feature coming soon!" });
   };
 
 
@@ -235,10 +278,20 @@ export default function FeedPage() {
             </CardContent>
             <CardFooter className="flex justify-between items-center p-4 border-t bg-muted/50">
               <div className="flex items-center space-x-1">
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
-                  <ThumbsUp className="mr-1.5 h-4 w-4" /> {item.likes}
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className={cn("hover:text-primary", item.likedByCurrentUser ? "text-primary" : "text-muted-foreground")}
+                  onClick={() => handleLikePost(item.id)}
+                >
+                  <ThumbsUp className={cn("mr-1.5 h-4 w-4", item.likedByCurrentUser ? "fill-primary" : "")} /> {item.likes}
                 </Button>
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-muted-foreground hover:text-primary"
+                  onClick={() => handleCommentPost(item.id)}
+                >
                   <MessageCircle className="mr-1.5 h-4 w-4" /> {item.comments}
                 </Button>
                 <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">

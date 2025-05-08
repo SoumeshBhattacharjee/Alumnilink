@@ -56,8 +56,13 @@ export default function SiteHeader() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center">
         <Link href="/" className="ml-4 mr-6 flex items-center space-x-2">
+          {/* Logo/Brand Name */}
           <span className="font-bold text-xl sm:inline-block">
             Alumnilink
+          </span>
+          {/* College Identifier */}
+          <span className="text-sm text-muted-foreground font-medium hidden sm:inline-block border-l border-border/60 pl-2 ml-1 py-1">
+            GCELT
           </span>
         </Link>
         {hasCheckedAuth && isAuthenticated && !isAuthPage && !isAdminRoute && <MainNav />}
@@ -121,4 +126,3 @@ export default function SiteHeader() {
     </header>
   );
 }
-
