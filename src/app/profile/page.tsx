@@ -1,3 +1,4 @@
+
 'use client'; 
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,40 +7,93 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
-import { User, Mail, Briefcase, CalendarDays, Edit3, BookOpen, Users, Linkedin } from 'lucide-react';
+import { User, Mail, Briefcase, CalendarDays, Edit3, BookOpen, Users, Linkedin, MapPin } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogTrigger, DialogClose } from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
+
+interface UserProfile {
+  name: string;
+  email: string;
+  graduationYear: number;
+  department: string;
+  currentCompany: string;
+  currentRole: string;
+  location: string;
+  avatarUrl: string;
+  bio: string;
+  skills: string[];
+  linkedin?: string;
+}
+
+const initialUserProfile: UserProfile = {
+  name: 'Alumni User',
+  email: 'alumni.user@example.com',
+  graduationYear: 2015,
+  department: 'Computer Science & Engineering',
+  currentCompany: 'Tech Solutions Inc.',
+  currentRole: 'Senior Software Engineer',
+  location: 'Kolkata, India',
+  avatarUrl: 'https://picsum.photos/id/433/200/200',
+  bio: 'Passionate software engineer with a focus on web development and cloud technologies. Always eager to learn and connect with fellow GCELT alumni.',
+  skills: ['React', 'Node.js', 'TypeScript', 'AWS', 'Next.js'],
+  linkedin: 'https://linkedin.com/in/alumniuser',
+};
 
 
 export default function ProfilePage() {
   const router = useRouter();
+  const { toast } = useToast();
   const [isLoadingUser, setIsLoadingUser] = useState(true);
-  
-  // This is a placeholder user. In a real app, user data would come from an auth provider/backend.
-  const user = {
-    name: 'Alumni User',
-    email: 'alumni.user@example.com',
-    graduationYear: 2015,
-    department: 'Computer Science & Engineering',
-    currentCompany: 'Tech Solutions Inc.',
-    currentRole: 'Senior Software Engineer',
-    location: 'Kolkata, India',
-    avatarUrl: 'https://picsum.photos/id/433/200/200',
-    bio: 'Passionate software engineer with a focus on web development and cloud technologies. Always eager to learn and connect with fellow GCELT alumni.',
-    skills: ['React', 'Node.js', 'TypeScript', 'AWS', 'Next.js'],
-    linkedin: 'https://linkedin.com/in/alumniuser',
-  };
+  const [user, setUser] = useState<UserProfile>(initialUserProfile);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [formData, setFormData] = useState<Omit<UserProfile, 'skills'> & { skills: string }>({
+    ...initialUserProfile,
+    skills: initialUserProfile.skills.join(', '),
+  });
 
   useEffect(() => {
     const authStatus = localStorage.getItem('isAuthenticated');
     if (authStatus !== 'true') {
       router.push('/login');
     } else {
+      // In a real app, fetch user data here
+      setUser(initialUserProfile);
+      setFormData({
+        ...initialUserProfile,
+        skills: initialUserProfile.skills.join(', '),
+      });
       setIsLoadingUser(false);
     }
   }, [router]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: name === 'graduationYear' ? (value === '' ? '' : Number(value)) : value }));
+  };
+
+  const handleSaveChanges = () => {
+    const skillsArray = formData.skills.split(',').map(s => s.trim()).filter(s => s);
+    const updatedUser = { ...formData, skills: skillsArray, graduationYear: Number(formData.graduationYear) };
+    setUser(updatedUser);
+    setIsEditDialogOpen(false);
+    toast({
+      title: "Profile Updated",
+      description: "Your profile has been successfully updated.",
+    });
+  };
+
+  const openEditDialog = () => {
+    setFormData({
+        ...user,
+        skills: user.skills.join(', '),
+    });
+    setIsEditDialogOpen(true);
+  }
+
 
   if (isLoadingUser) {
     return <ProfilePageSkeleton />;
@@ -50,9 +104,70 @@ export default function ProfilePage() {
     <div className="space-y-8 max-w-4xl mx-auto">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold tracking-tight">My Profile</h1>
-        <Button variant="outline">
-          <Edit3 className="mr-2 h-4 w-4" /> Edit Profile
-        </Button>
+        <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+            <DialogTrigger asChild>
+                <Button variant="outline" onClick={openEditDialog}>
+                    <Edit3 className="mr-2 h-4 w-4" /> Edit Profile
+                </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[625px]">
+                <DialogHeader>
+                    <DialogTitle>Edit Profile</DialogTitle>
+                </DialogHeader>
+                <div className="grid gap-4 py-4 max-h-[70vh] overflow-y-auto pr-2">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="name" className="text-right">Name</Label>
+                        <Input id="name" name="name" value={formData.name} onChange={handleInputChange} className="col-span-3" />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="email" className="text-right">Email</Label>
+                        <Input id="email" name="email" type="email" value={formData.email} onChange={handleInputChange} className="col-span-3" />
+                    </div>
+                     <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="avatarUrl" className="text-right">Avatar URL</Label>
+                        <Input id="avatarUrl" name="avatarUrl" value={formData.avatarUrl} onChange={handleInputChange} className="col-span-3" />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="graduationYear" className="text-right">Grad. Year</Label>
+                        <Input id="graduationYear" name="graduationYear" type="number" value={formData.graduationYear} onChange={handleInputChange} className="col-span-3" />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="department" className="text-right">Department</Label>
+                        <Input id="department" name="department" value={formData.department} onChange={handleInputChange} className="col-span-3" />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="currentCompany" className="text-right">Company</Label>
+                        <Input id="currentCompany" name="currentCompany" value={formData.currentCompany} onChange={handleInputChange} className="col-span-3" />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="currentRole" className="text-right">Role</Label>
+                        <Input id="currentRole" name="currentRole" value={formData.currentRole} onChange={handleInputChange} className="col-span-3" />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="location" className="text-right">Location</Label>
+                        <Input id="location" name="location" value={formData.location} onChange={handleInputChange} className="col-span-3" />
+                    </div>
+                    <div className="grid grid-cols-4 items-start gap-4">
+                        <Label htmlFor="bio" className="text-right pt-2">Bio</Label>
+                        <Textarea id="bio" name="bio" value={formData.bio} onChange={handleInputChange} className="col-span-3" rows={3} />
+                    </div>
+                    <div className="grid grid-cols-4 items-start gap-4">
+                        <Label htmlFor="skills" className="text-right pt-2">Skills</Label>
+                        <Textarea id="skills" name="skills" value={formData.skills} onChange={handleInputChange} className="col-span-3" placeholder="Comma-separated skills" rows={2}/>
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="linkedin" className="text-right">LinkedIn</Label>
+                        <Input id="linkedin" name="linkedin" value={formData.linkedin} onChange={handleInputChange} className="col-span-3" placeholder="https://linkedin.com/in/yourprofile"/>
+                    </div>
+                </div>
+                <DialogFooter>
+                    <DialogClose asChild>
+                        <Button type="button" variant="outline">Cancel</Button>
+                    </DialogClose>
+                    <Button type="button" onClick={handleSaveChanges}>Save Changes</Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
       </div>
 
       <Card className="shadow-lg">
@@ -66,7 +181,7 @@ export default function ProfilePage() {
           <div className="flex-grow">
             <CardTitle className="text-3xl">{user.name}</CardTitle>
             <p className="text-lg text-muted-foreground mt-1">{user.currentRole} at {user.currentCompany}</p>
-            <p className="text-sm text-muted-foreground">{user.location}</p>
+             <p className="text-sm text-muted-foreground flex items-center justify-center sm:justify-start"><MapPin className="mr-1 h-4 w-4" />{user.location}</p>
             {user.linkedin && (
               <a href={user.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm text-primary hover:underline mt-2">
                 <Linkedin className="mr-1 h-4 w-4" /> LinkedIn Profile
@@ -212,3 +327,4 @@ function ProfilePageSkeleton() {
     </div>
   );
 }
+
