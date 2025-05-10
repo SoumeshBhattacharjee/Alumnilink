@@ -69,8 +69,8 @@ const pricingTiers: PricingTier[] = [
       "Dedicated Account Manager",
       "24/7 Priority Support",
     ],
-    buttonText: "Choose University", // Changed from "Contact Sales" as per previous iteration resulting in numeric price
-    buttonLink: "/signup/college", // Placeholder
+    buttonText: "Choose University",
+    buttonLink: "/signup/college",
   },
 ];
 
@@ -117,9 +117,9 @@ export default function PricingSection() {
               const discountedYearly = yearlyRaw * 0.9;
               displayPrice = `₹${discountedYearly.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
               priceFrequency = "/ year";
-            } else if (!tier.monthlyPriceNumeric) { // For "Contact Sales" type plans if any
-                 displayPrice = tier.priceDisplayMonthly; // Show text like "Contact Sales"
-                 priceFrequency = ""; // No frequency needed
+            } else if (!tier.monthlyPriceNumeric) { 
+                 displayPrice = tier.priceDisplayMonthly; 
+                 priceFrequency = ""; 
             }
 
 
@@ -135,14 +135,14 @@ export default function PricingSection() {
                   <CardDescription className="text-sm h-10">{tier.description}</CardDescription> 
                 </CardHeader>
                 <CardContent className="flex-grow space-y-6">
-                  <div>
+                  <div className="flex items-baseline space-x-1">
                     <span className="text-4xl font-bold">{displayPrice}</span>
-                    <span className="text-muted-foreground">{priceFrequency}</span>
+                    <span className="text-sm text-muted-foreground">{priceFrequency}</span>
                   </div>
                   <ul className="space-y-2">
                     {tier.features.map((feature) => (
-                      <li key={feature} className="flex items-center">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
+                      <li key={feature} className="flex items-start">
+                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
                         <span className="text-sm text-muted-foreground">{feature}</span>
                       </li>
                     ))}
@@ -168,3 +168,4 @@ export default function PricingSection() {
     </section>
   );
 }
+
