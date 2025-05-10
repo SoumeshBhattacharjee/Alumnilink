@@ -7,6 +7,7 @@ import { ArrowRight, UserCircle as UserCircleIcon, Users, Newspaper, ClipboardLi
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import PricingSection from '@/components/landing/pricing-section'; // Import the new pricing section
 
 export default function Home() {
   const router = useRouter();
@@ -136,6 +137,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <PricingSection /> {/* Add the pricing section here */}
       </div>
     );
   }
