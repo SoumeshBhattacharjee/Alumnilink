@@ -19,52 +19,51 @@ interface PricingTier {
 
 const pricingTiers: PricingTier[] = [
   {
-    name: "Community Access",
-    price: "Free",
-    priceFrequency: "for Alumni",
-    description: "Basic access for all registered and verified alumni.",
-    features: [
-      "View Alumni Feed",
-      "Search Alumni Directory",
-      "Access Notice Board",
-      "View Job Postings",
-      "Basic Profile",
-      "Limited Messaging",
-    ],
-    buttonText: "Sign Up",
-    buttonLink: "/signup",
-  },
-  {
-    name: "College Portal",
-    price: "₹4999",
+    name: "Standard Plan",
+    price: "₹5,000",
     priceFrequency: "/ month",
-    description: "For college administrations to manage their dedicated alumni portal.",
+    description: "Ideal for growing communities, supporting up to 5,000 alumni.",
     features: [
       "Dedicated College Portal",
-      "Admin Dashboard",
-      "User Management & Approvals",
+      "Admin Dashboard Access",
+      "User Management (up to 5K)",
       "Post as Admin (Announcements, Events)",
       "Basic Analytics",
-      "Custom Branding Options",
-      "Email Support",
+      "Standard Support",
     ],
-    buttonText: "Get Started",
-    buttonLink: "/admin/signup", // Placeholder for admin signup/contact
+    buttonText: "Choose Standard",
+    buttonLink: "/signup/college", // Placeholder for college signup
+  },
+  {
+    name: "Pro Plan",
+    price: "₹30,000",
+    priceFrequency: "/ month",
+    description: "Perfect for large networks, supporting up to 100,000 alumni.",
+    features: [
+      "All Standard Plan Features",
+      "Advanced User Management (up to 100K)",
+      "Enhanced Analytics & Reporting",
+      "Custom Branding Options",
+      "Priority Email Support",
+      "Data Export Options",
+    ],
+    buttonText: "Choose Pro",
+    buttonLink: "/signup/college", // Placeholder for college signup
     isPopular: true,
   },
   {
     name: "Enterprise Plan",
-    price: "Custom",
-    priceFrequency: "for Institutions",
-    description: "Tailored solutions for larger institutions or multiple colleges.",
+    price: "₹100,000",
+    priceFrequency: "/ month",
+    description: "Comprehensive solution for institution-scale needs, supporting up to 1 million alumni.",
     features: [
-      "All College Portal Features",
-      "Advanced Analytics & Reporting",
-      "Data Export Capabilities",
-      "Payment & Subscription Management Tools",
-      "Integration Options (e.g., CRM)",
+      "All Pro Plan Features",
+      "Extensive User Management (up to 1M)",
+      "Full Analytics Suite",
+      "Payment & Subscription Tools Integration",
+      "API Access (Optional)",
       "Dedicated Account Manager",
-      "Priority Support",
+      "24/7 Priority Support",
     ],
     buttonText: "Contact Sales",
     buttonLink: "/contact-sales", // Placeholder for contact page
@@ -77,10 +76,10 @@ export default function PricingSection() {
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-            Pricing Plans
+            Pricing Plans for Institutions
           </h2>
           <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Choose the plan that best fits your needs. Free access for individual alumni, and tailored plans for college administrations.
+            Choose the plan that best fits your institution's needs. Individual alumni access remains free.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 md:gap-8">
@@ -93,7 +92,7 @@ export default function PricingSection() {
               )}
               <CardHeader className="pb-4">
                 <CardTitle className="text-2xl">{tier.name}</CardTitle>
-                <CardDescription className="text-sm">{tier.description}</CardDescription>
+                <CardDescription className="text-sm h-10">{tier.description}</CardDescription> 
               </CardHeader>
               <CardContent className="flex-grow space-y-6">
                 <div>
@@ -103,7 +102,7 @@ export default function PricingSection() {
                 <ul className="space-y-2">
                   {tier.features.map((feature) => (
                     <li key={feature} className="flex items-center">
-                      <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
                       <span className="text-sm text-muted-foreground">{feature}</span>
                     </li>
                   ))}
@@ -118,6 +117,11 @@ export default function PricingSection() {
               </CardFooter>
             </Card>
           ))}
+        </div>
+         <div className="mt-12 text-center">
+            <p className="text-muted-foreground">
+                Individual alumni can <Link href="/signup" className="text-primary hover:underline font-semibold">sign up for free</Link> to access the community features.
+            </p>
         </div>
       </div>
     </section>
