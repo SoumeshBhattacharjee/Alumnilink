@@ -42,7 +42,7 @@ export default function Home() {
     return (
       <div className="flex flex-col items-center text-center">
         <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
               <div className="flex flex-col justify-center space-y-4 text-left">
                 <div className="space-y-2">
@@ -82,16 +82,16 @@ export default function Home() {
         </section>
 
         <section className="w-full py-12 md:py-24 lg:py-32 bg-muted/50">
-          <div className="container px-4 md:px-6">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Your Alumni Hub</h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="max-w-3xl text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Discover features designed to help you connect and grow within the GCELT alumni network.
                 </p>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl items-start gap-8 mt-12 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mx-auto grid w-full items-start gap-8 mt-12 sm:grid-cols-2 lg:grid-cols-3">
                <FeatureCard
                 title="Community Feed"
                 description="Stay updated with news, events, and discussions from the alumni community."
@@ -175,3 +175,4 @@ function FeatureCard({ icon, title, description, link, linkLabel }: FeatureCardP
     </div>
   );
 }
+

@@ -52,7 +52,7 @@ const pricingTiers: PricingTier[] = [
     isPopular: true,
   },
   {
-    name: "University",
+    name: "University", // Was Enterprise, corrected to University as per user prompt
     price: "₹100,000",
     priceFrequency: "/ month",
     description: "Comprehensive solution for university-scale needs, supporting up to 1 million alumni.",
@@ -73,12 +73,12 @@ const pricingTiers: PricingTier[] = [
 export default function PricingSection() {
   return (
     <section className="w-full py-12 md:py-24 lg:py-32">
-      <div className="container px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
             Pricing Plans for Institutions
           </h2>
-          <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          <p className="max-w-3xl text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
             Choose the plan that best fits your institution's needs. Individual alumni access remains free.
           </p>
         </div>
