@@ -19,10 +19,10 @@ interface PricingTier {
 
 const pricingTiers: PricingTier[] = [
   {
-    name: "Standard Plan",
+    name: "Small",
     price: "₹5,000",
     priceFrequency: "/ month",
-    description: "Ideal for growing communities, supporting up to 5,000 alumni.",
+    description: "Ideal for small communities, supporting up to 5,000 alumni.",
     features: [
       "Dedicated College Portal",
       "Admin Dashboard Access",
@@ -31,33 +31,33 @@ const pricingTiers: PricingTier[] = [
       "Basic Analytics",
       "Standard Support",
     ],
-    buttonText: "Choose Standard",
+    buttonText: "Choose Small",
     buttonLink: "/signup/college", // Placeholder for college signup
   },
   {
-    name: "Pro Plan",
+    name: "College",
     price: "₹30,000",
     priceFrequency: "/ month",
-    description: "Perfect for large networks, supporting up to 100,000 alumni.",
+    description: "Perfect for college-wide networks, supporting up to 100,000 alumni.",
     features: [
-      "All Standard Plan Features",
+      "All Small Plan Features",
       "Advanced User Management (up to 100K)",
       "Enhanced Analytics & Reporting",
       "Custom Branding Options",
       "Priority Email Support",
       "Data Export Options",
     ],
-    buttonText: "Choose Pro",
+    buttonText: "Choose College",
     buttonLink: "/signup/college", // Placeholder for college signup
     isPopular: true,
   },
   {
-    name: "Enterprise Plan",
+    name: "University",
     price: "₹100,000",
     priceFrequency: "/ month",
-    description: "Comprehensive solution for institution-scale needs, supporting up to 1 million alumni.",
+    description: "Comprehensive solution for university-scale needs, supporting up to 1 million alumni.",
     features: [
-      "All Pro Plan Features",
+      "All College Plan Features",
       "Extensive User Management (up to 1M)",
       "Full Analytics Suite",
       "Payment & Subscription Tools Integration",
@@ -127,3 +127,4 @@ export default function PricingSection() {
     </section>
   );
 }
+
