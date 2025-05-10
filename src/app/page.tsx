@@ -17,17 +17,17 @@ export default function Home() {
     // Simulate checking auth status
     const authStatus = localStorage.getItem('isAuthenticated') === 'true';
     setIsAuthenticated(authStatus);
-    if (authStatus) {
-      // If authenticated, immediately redirect to feed, bypassing landing page content for logged-in users.
-      router.push('/feed');
-    } else {
-      setIsLoading(false);
-    }
-  }, [router]);
+    setIsLoading(false); // Always set loading to false after checking auth
+  }, []); // Runs once on mount
 
-  // This loading state is primarily for when the user is not authenticated yet,
-  // or if the auth check is in progress.
-  if (isLoading && !isAuthenticated) { 
+  useEffect(() => {
+    // Redirect if authenticated and loading is complete
+    if (!isLoading && isAuthenticated) {
+      router.push('/feed');
+    }
+  }, [isLoading, isAuthenticated, router]);
+
+  if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[calc(100vh-12rem)]">
         <Loader2 className="h-12 w-12 animate-spin text-primary" />
@@ -35,9 +35,9 @@ export default function Home() {
       </div>
     );
   }
-  
-  // Show landing page content only if not authenticated and not loading
-  if (!isAuthenticated && !isLoading) {
+
+  // If not authenticated and loading is complete, show landing page
+  if (!isAuthenticated) {
     return (
       <div className="flex flex-col items-center text-center">
         <section className="w-full py-12 md:py-24 lg:py-32">
@@ -140,12 +140,11 @@ export default function Home() {
     );
   }
 
-  // This state is reached if user is authenticated and router.push('/feed') is still processing.
-  // Or if isLoading became false but isAuthenticated also became true within the same render cycle.
+  // If authenticated and not loading, and redirect is in progress
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-12rem)]">
       <Loader2 className="h-12 w-12 animate-spin text-primary" />
-      <p className="mt-4 text-muted-foreground">Redirecting...</p>
+      <p className="mt-4 text-muted-foreground">Redirecting to your feed...</p>
     </div>
   );
 }

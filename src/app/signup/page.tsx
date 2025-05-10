@@ -25,7 +25,7 @@ export default function SignupPage() {
   // Redirect if already logged in
   useEffect(() => {
     if (localStorage.getItem('isAuthenticated') === 'true') {
-      router.push('/profile');
+      router.push('/feed'); // Changed from /profile to /feed for consistency
     }
   }, [router]);
 
